@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="media/img/asysteco.ico" type="image/x-icon">
+    <link rel="stylesheet" href="media/css/bootstrap-4.0.0/bootstrap.min.css">
+    <link rel="stylesheet" href="media/css/login-style.css">
+    <script src="media/js/jquery/jquery.min.js"></script>
+    <script src="media/js/bootstrap-4.0.0/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#login').focus();
+      });
+    </script>
+    <title>Login</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <div class="fadeIn first">
+            <img src="media/img/asysteco.png" width='125' id="icon" alt="Logo de Asysteco" /> <h1>Iniciar Sesión</h1>
+          </div>
+
+          <!-- Login Form -->
+          <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
+            <input type="text" id="login" class="fadeIn second" name="Iniciales" placeholder="Usuario (Iniciales)" required>
+            <input type="password" id="password" class="fadeIn third" name="pass" placeholder="Contraseña" required>
+            <input type="submit" class="fadeIn fourth" value="Iniciar">
+          </form>
+
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            <p>Si ha olvidado su contraseña, por favor contacte con Jefatura para poder resetearla. Gracias.</p>
+          </div>
+        </div>
+      </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="ERR_LOGIN_MODAL" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p style="color: red;">
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
