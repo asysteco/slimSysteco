@@ -1,0 +1,303 @@
+html {
+    scroll-behavior: smooth;
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1060;
+    cursor: pointer;
+}
+
+.flecha_div {
+    position: fixed;
+    visibility: visible;
+    bottom: -50px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    transition-duration: 0.8s;
+    opacity: 0;
+    z-index: 1018;
+    box-shadow: 8px 6px 5px rgba(66, 66, 66, 0.7);
+}
+
+.flecha_div_visible {
+    position: fixed;
+    visibility: visible;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    transition-duration: 0.4s;
+    z-index: 1018;
+    opacity: 1;
+    box-shadow: 4px 4px 12px rgba(66, 66, 66, 0.7);
+}
+
+.flecha {
+    position: fixed;
+    bottom: -50px;
+    right: 20px;
+    width: 50px;
+    opacity: 0;
+    visibility: visible;
+    transition-duration: 0.8s;
+    z-index: 1019;
+}
+
+.jsflecha {
+    opacity: 0.6;
+    visibility: visible;
+    bottom: 20px;
+    transition-duration: 0.4s;
+    z-index: 1019;
+}
+
+.jsflecha:hover {
+    transform: rotate(360deg);
+    opacity: 1;
+    z-index: 1019;
+}
+
+#loadingMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100%;
+    z-index: 1070;
+}
+
+#loading-msg {
+    color: beige;
+    margin-top: 150px;
+    z-index: 1070;
+}
+
+#loading {
+    display: none;
+    overflow: hidden;
+}
+
+#spinnerWrapper {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100%;
+    z-index: 1070;
+}
+
+.lds-dual-ring {
+    display: block;
+    width: 80px;
+    height: 80px;
+    z-index: 1070;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #17a2b8;
+    border-color: #17a2b8 transparent #17a2b8 transparent;
+    animation: lds-dual-ring 0.8s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#btn-import {
+    cursor: pointer;
+}
+
+#cambio-pass-icon {
+    transition-duration: 0.6s;
+}
+
+.rotate-pass {
+    transform: rotate(360deg);
+    transition-duration: 0.6s;
+}
+
+#message {
+    transition-duration: 0.4s;
+}
+
+.message-jump {
+    transform: rotate(-15deg);
+    transition-duration: 0.4s;
+}
+
+.bell_rings {
+    animation: bell_rings 1s ease infinite;
+}
+
+.select_profesor {
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 5px;
+    border: 2px solid #f6f6f6;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    width: 85%;
+}
+
+.marcaje {
+    cursor: pointer;
+}
+
+@keyframes bell_rings {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(25deg);
+    }
+    50% {
+        transform: rotate(-25deg);
+    }
+    75% {
+        transform: rotate(35deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    table.responsiveTable thead {
+        display: none;
+    }
+    table.responsiveTable td {
+        display: flex;
+        text-align: left !important;
+    }
+    table.responsiveTable td::before {
+        content: attr(data-th);
+        font-weight: bold;
+        width: 120px;
+        min-width: 120px;
+    }
+}
+
+#modal-profesores {
+    overflow: hidden;
+}
+
+.modal-fs {
+    padding: 0 !important;
+}
+
+.modal-fs .modal-dialog {
+    width: 95%;
+    max-width: none;
+    height: 95%;
+}
+
+.modal-fs .modal-content {
+    height: 100%;
+}
+
+.modal-fs .modal-body {
+    overflow-y: auto;
+}
+
+.tp {
+    text-decoration: none;
+    position: relative;
+}
+
+.tp .tpt {
+    visibility: hidden;
+    width: fit-content;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    bottom: 125%;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tp .tpt::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 30%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tp:hover .tpt {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Color Icono Personal No Docente en Listados Admon */
+
+.personal-icon-azul {
+    color: #17a2b8;
+    padding: 0 5px 0 4px;
+}
+
+.no-horario {
+    height: calc(100vh - 65px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.asistencias-row {
+    text-align: center;
+    overflow-y: scroll;
+    max-height: 65vh;
+}
+    .asistencias-row::-webkit-scrollbar {
+        display: none;
+    }

@@ -26,4 +26,5 @@ return function (ContainerBuilder $containerBuilder) {
             return $logger;
         },
     ]);
+    require __DIR__ . '/dependencies/TwigDependencies.php';
 };
