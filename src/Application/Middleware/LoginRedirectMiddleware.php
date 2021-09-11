@@ -9,7 +9,7 @@ use Psr\Http\Server\MiddlewareInterface as Middleware;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
-class SessionMiddleware implements Middleware
+class LoginRedirectMiddleware implements Middleware
 {
     /**
      * {@inheritdoc}

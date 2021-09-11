@@ -16,12 +16,13 @@ return function (App $app) {
         return $response;
     });
 
-    $app->get('/', function (Request $request, Response $response) {
-        $response->getBody()->write('Hello world!');
-        return $response;
+    $app->group('', function (Group $group) {
+        $group->get('/', function (Request $request, Response $response) {
+            $response->getBody()->write('Hello world!');
+            return $response;
+        });
+        $group->get('/login', LoginAction::class)->setName('login');
     });
-        
-    $app->get('/login', LoginAction::class)->setName('login');
 
     $app->group('/users', function (Group $group) {
         $group->get('', ListUsersAction::class);
