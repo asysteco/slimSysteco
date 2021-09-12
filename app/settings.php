@@ -12,13 +12,21 @@ return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
         SettingsInterface::class => function () {
             return new Settings([
-                'displayErrorDetails' => true, // Should be set to false in production
+                'displayErrorDetails' => ENVIRONMENT === DEVELOPMENT || ENVIRONMENT === TESTING ? true : false,
                 'logError'            => false,
                 'logErrorDetails'     => false,
                 'logger' => [
-                    'name' => 'slim-app',
-                    'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
+                    'name' => 'asysteco-app',
+                    'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/asysteco-app.log',
                     'level' => Logger::DEBUG,
+                ],
+            ]);
+        },
+        'TwigSettings' => function() {
+            return new Settings([
+                'settings' => [
+                    'cache' => BASE_PATH . '/templates/cache',
+                    'auto_reload' => ENVIRONMENT === DEVELOPMENT || ENVIRONMENT === TESTING ? true : false
                 ],
             ]);
         }
