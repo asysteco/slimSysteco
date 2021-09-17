@@ -22,6 +22,19 @@ return function (ContainerBuilder $containerBuilder) {
                 ],
             ]);
         },
+        'DataBaseSettings' => function() {
+            return new Settings([
+                'GestReader' => [
+                    'engine' => $_ENV['DB_GEST_ENGINE'],
+                    'host' => $_ENV['DB_GEST_HOSTNAME'],
+                    'dbname' => $_ENV['DB_GEST_DBNAME'],
+                    'user' => $_ENV['DB_GEST_USERNAME'],
+                    'password' => $_ENV['DB_GEST_PASSWORD'],
+                    'port' => $_ENV['DB_GEST_PORT'],
+                    'charset' => $_ENV['DB_GEST_CHARSET']
+                ],
+            ]);
+        },
         'TwigSettings' => function() {
             return new Settings([
                 'settings' => [
