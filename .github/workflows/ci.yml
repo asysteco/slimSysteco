@@ -36,16 +36,16 @@ jobs:
         with:
           php_version: 7.4
           version: 2
-          ssh_key: ${{ secrets.PRIV_SECRET }}
-          ssh_key_pub: ${{ secrets.PUB_SECRET }}
 
       - name: Remove .gitignore
         run: |
           rm .gitignore 
 
       - name: Push artifacts
+        env: 
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         run: |
-          git clone --depth 1 --single-branch -b deploy git@github.com:asysteco/slimSysteco.git ../deploy
+          git clone --depth 1 --single-branch -b deploy https://asysteco@github.com/asysteco/slimSysteco.git ../deploy
           mv ../deploy/.git deploy-.git
           rm -rf ../deploy
           mkdir ../deploy
@@ -54,4 +54,4 @@ jobs:
           cd ../deploy
           git add .
           git diff --staged --quiet || git commit -m "Update Artifacts"
-          git push
+          git push https://asysteco:$API_TOKEN_GITHUB@github.com/asysteco/slimSysteco.git --set-upstream deploy
