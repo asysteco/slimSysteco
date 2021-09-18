@@ -36,9 +36,18 @@ jobs:
         with:
           php_version: 7.4
           version: 2
-      - name: Scan Directory
+
+      - name: Create Directory
         run: |
-          ls -l ./
+          mkdir deploy
+
+      - name: Create Directory
+        run: |
+          cp -ra ./* ./deploy
+
+      - name: Create Directory
+        run: |
+          ls -la ./deploy 
 
       # - name: Pushes to another repository
       #   uses: cpina/github-action-push-to-another-repository@main
