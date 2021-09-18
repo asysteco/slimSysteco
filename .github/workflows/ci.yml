@@ -37,25 +37,17 @@ jobs:
           php_version: 7.4
           version: 2
 
-      - name: Create Directory
-        run: |
-          mkdir deploy
-
-      - name: Create Directory
-        run: |
-          cp -ra ./* ./deploy
-
-      - name: Create Directory
+      - name: List Directory
         run: |
           ls -la ./deploy 
 
-      # - name: Pushes to another repository
-      #   uses: cpina/github-action-push-to-another-repository@main
-      #   env:
-      #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-      #   with:
-      #     source-directory: 'deploy'
-      #     destination-github-username: 'asysteco'
-      #     destination-repository-name: 'slimSysteco'
-      #     user-email: alvaromelkunas9@gmail.com
-      #     target-branch: deploy
+      - name: Pushes to deploy
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'deploy'
+          destination-github-username: 'asysteco'
+          destination-repository-name: 'slimSysteco'
+          user-email: alvaromelkunas9@gmail.com
+          target-branch: deploy
