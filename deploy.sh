@@ -10,6 +10,10 @@ git config --global user.name "asysteco"
 git clone --single-branch --branch "deploy" "https://asysteco@github.com/asysteco/slimSysteco.git" "$CLONE_DIR"
 ls -la "$CLONE_DIR"
 
+
+echo "Composer Install"
+composer install
+
 TARGET_DIR=$(mktemp -d)
 echo "Copy contents to target git repository"
 cp -ra ./ "$TARGET_DIR"
@@ -23,10 +27,6 @@ rm -fr ./.*
 mv "./git" "./.git"
 mv "./gitignore" "./.gitignore"
 mv "./htaccess" "./.htaccess"
-
-echo "Composer Install"
-
-composer install
 
 echo "Files that will be pushed:"
 ls -la
