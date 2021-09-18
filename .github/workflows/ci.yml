@@ -24,10 +24,10 @@ jobs:
           git config --global user.name "GitHub Actions"
 
       - name: GitHub Checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Install Composer 
-      - uses: php-actions/composer@v6
+        uses: php-actions/composer@v6
 
       - uses: actions/upload-artifact@v2
         with:
@@ -39,7 +39,7 @@ jobs:
           ls ./
 
       - name: Deploy on branch
-      - uses: cpina/github-action-push-to-another-repository@main
+        uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
