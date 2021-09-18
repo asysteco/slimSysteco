@@ -1,32 +1,35 @@
 
 echo "Cloning Repository"
 # Setup git
-CLONE_DIR=$(mktemp -d)
+echo "Create Deploy dir"
+$DEPLOY_DIR = "deploy"
+mkdir "$DEPLOY_DIR"
 
 echo "Cloning destination git repository"
 # Setup git
 git config --global user.email "alvaromelkunas9@gmail.com"
 git config --global user.name "asysteco"
-git clone --single-branch --branch "deploy" "https://asysteco@github.com/asysteco/slimSysteco.git" "$CLONE_DIR"
-ls -la "$CLONE_DIR"
+git clone --single-branch --branch "deploy" "https://asysteco@github.com/asysteco/slimSysteco.git" "$DEPLOY_DIR"
+ls -la "$DEPLOY_DIR"
 
 
 echo "Composer Install"
 composer install
 
-TARGET_DIR=$(mktemp -d)
-echo "Copy contents to target git repository"
-cp -ra ./ "$TARGET_DIR"
-cd "$TARGET_DIR"
-mv "./.git" "./git"
-mv "./.gitignore" "./gitignore"
-mv "./.htaccess" "./htaccess"
+echo "Clear deploy dir"
+rm -fr "$DEPLOY_DIR"/*
 
+echo "Remove source Files"
 rm -fr ./.*
 
-mv "./git" "./.git"
-mv "./gitignore" "./.gitignore"
-mv "./htaccess" "./.htaccess"
+echo "Move Files"
+cp -ra ./ "$DEPLOY_DIR"
+
+echo "Change Dir"
+cd "$DEPLOY_DIR"
+
+echo "Change branch"
+git status
 
 echo "Files that will be pushed:"
 ls -la
