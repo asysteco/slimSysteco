@@ -39,6 +39,13 @@ jobs:
 
       - name: List Directory
         run: |
+          ls -la ./
+
+      - name: Move to deploy
+        run: |
+          mv ./* ./deploy 
+      - name: List Directory
+        run: |
           ls -la ./ 
 
       - name: Pushes to deploy
