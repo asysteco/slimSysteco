@@ -46,7 +46,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: '.'
+          source-directory: './'
           destination-github-username: 'asysteco'
           destination-repository-name: 'slimSysteco'
           user-email: alvaromelkunas9@gmail.com
