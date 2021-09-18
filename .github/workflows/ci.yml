@@ -27,6 +27,7 @@ jobs:
 
       - name: Collect artifacts
         run: |
+          ls ./
           cat output.log
       - name: Push artifacts
         run: |
