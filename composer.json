@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "php": "^7.2 || ^8.0",
+        "php": "^7.4",
         "ext-json": "*",
         "dflydev/fig-cookies": "^3.0",
         "monolog/monolog": "^2.3",
