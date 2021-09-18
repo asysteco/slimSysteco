@@ -16,11 +16,11 @@ ls -la "$DEPLOY_DIR"
 echo "Composer Install"
 composer install
 
-echo "Clear deploy dir"
-sudo rm -fr "$DEPLOY_DIR"/*
+echo "Clear deploy dir $DEPLOY_DIR/*"
+# sudo rm -fr "$DEPLOY_DIR"/*
 
 echo "Remove source Files"
-rm -fr ./.git*
+# rm -fr ./.git*
 
 echo "Move Files"
 cp -ra ./ "$DEPLOY_DIR"
