@@ -15,11 +15,10 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install dependencies
-        uses: php-actions/composer@master
+        uses: php-actions/composer@v6
         with:
           php_version: 7.4
-          ssh_key: ${{ secrets.PRIV_SECRET }}
-          ssh_key_pub: ${{ secrets.PUB_SECRET }}
+          version: 2
 
       - uses: actions/upload-artifact@v2
         with:
