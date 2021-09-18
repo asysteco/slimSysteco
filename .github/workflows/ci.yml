@@ -26,28 +26,6 @@ jobs:
       - name: GitHub Checkout
         uses: actions/checkout@v2
 
-      - name: Install Composer 
-        uses: php-actions/composer@v6
-        with:
-          php_version: 7.4
-          version: 2
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: debug-output
-          path: output.log
-
-      - name: Collect artifacts
+      - name: Install Composer
         run: |
-          ls ./
-
-      - name: Deploy on branch
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          source-directory: './'
-          destination-github-username: 'asysteco'
-          destination-repository-name: 'slimSysteco'
-          user-email: alvaromelkunas9@gmail.com
-          target-branch: deploy
+          sh ./deploy.sh
