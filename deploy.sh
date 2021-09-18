@@ -1,12 +1,20 @@
 
 echo "Cloning Repository"
 # Setup git
-CLONE_DIR=$(mktemp -d)
-git status
+
+git checkout deploy
+git pull origin develop
+
 ls -la ./
 
 echo "Composer Install"
 
 composer install
 
+composer dump-autoload -o
+
 ls -la ./
+
+git add .
+git commit -m "Update deploy"
+git push
