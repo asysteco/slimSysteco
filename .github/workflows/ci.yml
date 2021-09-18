@@ -52,14 +52,14 @@ jobs:
       - name: List Directory
         run: |
           ls -la ./ 
-          ls -la ../deploy 
+          cd ../deploy 
 
       - name: Pushes to deploy
         uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: '../deploy'
+          source-directory: './'
           destination-github-username: 'asysteco'
           destination-repository-name: 'slimSysteco'
           user-email: alvaromelkunas9@gmail.com
