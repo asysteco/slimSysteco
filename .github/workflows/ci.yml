@@ -43,6 +43,14 @@ jobs:
           mv deploy-.git deploy/.git
           cd deploy
           cp ../output.log .
-          git add .
-          git diff --staged --quiet || git commit -m "Update Artifacts"
-          git push
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'deploy'
+          destination-github-username: 'asysteco'
+          destination-repository-name: 'slimSysteco'
+          user-email: alvaromelkunas9@gmail.com
+          target-branch: deploy
