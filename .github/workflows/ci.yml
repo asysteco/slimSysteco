@@ -32,5 +32,7 @@ jobs:
           php-version: 7.4
 
       - name: Install Composer
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         run: |
           sh ./deploy.sh
