@@ -23,6 +23,8 @@ jobs:
           git config --global user.name "GitHub Actions"
 
       - uses: actions/checkout@v2
+      - run: |
+          echo "holii" > output.log
       - uses: actions/upload-artifact@v2
         with:
           name: debug-output
