@@ -27,8 +27,7 @@ jobs:
 
       - name: Collect artifacts
         run: |
-          mkdir dist
-          cp out/*.pdf dist/
+          cat output.log
       - name: Push artifacts
         run: |
           git clone --depth 1 --single-branch -b deploy git@github.com:asysteco/slimSysteco.git deploy
