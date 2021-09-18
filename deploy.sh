@@ -7,7 +7,7 @@ echo "Cloning destination git repository"
 # Setup git
 git config --global user.email "alvaromelkunas9@gmail.com"
 git config --global user.name "asysteco"
-git clone --single-branch --branch "deploy" "https://asysteco:$API_TOKEN_GITHUB@github.com/asysteco/slimSysteco.git" "$CLONE_DIR"
+git clone --single-branch --branch "deploy" "https://asysteco@github.com/asysteco/slimSysteco.git" "$CLONE_DIR"
 ls -la "$CLONE_DIR"
 
 TARGET_DIR=$(mktemp -d)
@@ -47,4 +47,4 @@ git diff-index --quiet HEAD || git commit --message "$COMMIT_MESSAGE"
 
 echo "git push origin:"
 # --set-upstream: sets de branch when pushing to a branch that does not exist
-git push "https://asysteco:$API_TOKEN_GITHUB@github.com/asysteco/slimSysteco.git" --set-upstream "deploy"
+git push "https://asysteco@github.com/asysteco/slimSysteco.git" --set-upstream "deploy"
