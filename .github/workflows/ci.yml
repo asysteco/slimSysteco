@@ -42,7 +42,7 @@ jobs:
           mkdir deploy
           mv deploy-.git deploy/.git
           cd deploy
-          cp output.log .
+          cp ../output.log .
           git add .
           git diff --staged --quiet || git commit -m "Update Artifacts"
           git push
