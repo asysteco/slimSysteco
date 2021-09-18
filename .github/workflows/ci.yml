@@ -36,6 +36,8 @@ jobs:
         with:
           php_version: 7.4
           version: 2
+          ssh_key: ${{ secrets.PRIV_SECRET }}
+          ssh_key_pub: ${{ secrets.PUB_SECRET }}
 
       - name: Remove .gitignore
         run: |
