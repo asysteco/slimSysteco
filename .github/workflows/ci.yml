@@ -25,3 +25,20 @@ jobs:
         with:
           name: debug-output
           path: output.log
+
+      - name: Collect artifacts
+        run: |
+          mkdir dist
+          cp out/*.pdf dist/
+      - name: Push artifacts
+        run: |
+          git clone --depth 1 --single-branch -b deploy git@github.com:asysteco/slimSysteco.git deploy
+          mv deploy/.git deploy-.git
+          rm -rf deploy
+          mkdir deploy
+          mv deploy-.git deploy/.git
+          cd deploy
+          cp -R ../dist/* .
+          git add .
+          git diff --staged --quiet || git commit -m "Update Artifacts"
+          git push
