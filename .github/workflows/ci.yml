@@ -39,7 +39,7 @@ jobs:
 
       - name: List Directory
         run: |
-          ls -la ./deploy 
+          ls -la ./ 
 
       - name: Pushes to deploy
         uses: cpina/github-action-push-to-another-repository@main
