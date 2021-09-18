@@ -13,3 +13,5 @@ echo "Composer Install"
 composer install
 
 composer dump-autoload -o
+
+ls -la "$CLONE_DIR"
