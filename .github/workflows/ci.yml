@@ -16,6 +16,7 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.1
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Setup Git Client
         run: |
           ssh-keyscan -H github.com >> ~/.ssh/known_hosts
@@ -38,7 +39,7 @@ jobs:
           ls ./
 
       - name: Deploy on branch
-        uses: cpina/github-action-push-to-another-repository@main
+      - uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
