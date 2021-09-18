@@ -23,13 +23,6 @@ jobs:
           git config --global user.name "GitHub Actions"
 
       - uses: actions/checkout@v2
-
-      - name: Install dependencies
-        uses: php-actions/composer@v6
-        with:
-          php_version: 7.4
-          version: 2
-
       - uses: actions/upload-artifact@v2
         with:
           name: debug-output
