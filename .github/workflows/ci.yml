@@ -37,9 +37,9 @@ jobs:
           php_version: 7.4
           version: 2
 
-      - name: List Directory
+      - name: Remove .gitignore
         run: |
-          ls -la ./
+          rm .gitignore
 
       - name: Pushes to deploy
         uses: cpina/github-action-push-to-another-repository@main
