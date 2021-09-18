@@ -1,5 +1,5 @@
 
-echo "Cloning destination git repository"
+echo "Cloning Repository"
 # Setup git
 CLONE_DIR=$(mktemp -d)
 
@@ -8,8 +8,8 @@ git config --global user.name "asysteco"
 git clone --single-branch --branch "develop" "https://asysteco:$API_TOKEN_GITHUB@github.com/asysteco/slimSysteco.git" "$CLONE_DIR"
 ls -la "$CLONE_DIR"
 
-# echo "Composer Install"
+echo "Composer Install"
 
-# composer install
+composer install
 
-# composer dump-autoload -o
+composer dump-autoload -o
