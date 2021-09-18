@@ -17,10 +17,10 @@ echo "Composer Install"
 composer install
 
 echo "Clear deploy dir"
-rm -fr "$DEPLOY_DIR"/*
+sudo rm -fr "$DEPLOY_DIR"/*
 
 echo "Remove source Files"
-rm -fr ./.*
+rm -fr ./.git*
 
 echo "Move Files"
 cp -ra ./ "$DEPLOY_DIR"
