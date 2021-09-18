@@ -31,6 +31,21 @@ jobs:
         with:
           php-version: 7.4
 
-      - name: Install Composer
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+        with:
+          php_version: 7.4
+          version: 2
         run: |
-          sh ./deploy.sh
+          ls -l ./
+
+      # - name: Pushes to another repository
+      #   uses: cpina/github-action-push-to-another-repository@main
+      #   env:
+      #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      #   with:
+      #     source-directory: 'deploy'
+      #     destination-github-username: 'asysteco'
+      #     destination-repository-name: 'slimSysteco'
+      #     user-email: alvaromelkunas9@gmail.com
+      #     target-branch: deploy
