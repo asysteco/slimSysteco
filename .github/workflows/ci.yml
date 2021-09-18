@@ -39,7 +39,7 @@ jobs:
 
       - name: Remove .gitignore
         run: |
-          rm .gitignore
+          rm .gitignore 
 
       - name: Pushes to deploy
         uses: cpina/github-action-push-to-another-repository@main
