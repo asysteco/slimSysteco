@@ -2,7 +2,7 @@
 echo "Cloning Repository"
 # Setup git
 echo "Create Deploy dir"
-$DEPLOY_DIR = "deploy"
+DEPLOY_DIR = "deploy"
 mkdir "$DEPLOY_DIR"
 
 echo "Cloning destination git repository"
