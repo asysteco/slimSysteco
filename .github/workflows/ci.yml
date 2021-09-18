@@ -47,7 +47,7 @@ jobs:
 
       - name: Move to deploy
         run: |
-          mv ./* ../deploy
+          sudo mv ./* ../deploy
 
       - name: List Directory
         run: |
