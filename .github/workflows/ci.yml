@@ -30,28 +30,3 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 7.4
-
-      - name: Install dependencies
-        uses: php-actions/composer@v6
-        with:
-          php_version: 7.4
-          version: 2
-
-      - name: Remove .gitignore
-        run: |
-          rm .gitignore 
-
-      - name: Push artifacts
-        env: 
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        run: |
-          git clone --depth 1 --single-branch -b deploy https://asysteco@github.com/asysteco/slimSysteco.git ../deploy
-          mv ../deploy/.git deploy-.git
-          rm -rf ../deploy
-          mkdir ../deploy
-          mv deploy-.git ../deploy/.git
-          cp -R ./* ../deploy
-          cd ../deploy
-          git add .
-          git diff --staged --quiet || git commit -m "Update Artifacts"
-          git push https://asysteco:$API_TOKEN_GITHUB@github.com/asysteco/slimSysteco.git --set-upstream deploy

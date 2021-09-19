@@ -49,6 +49,7 @@ class ValidateSiteMiddleware implements Middleware
         }
 
         $this->clearSessionSite();
+
         $route = RouteContext::fromRequest($request)->getRoute();
         $site = $route->getArgument(self::COOKIE_VALUE);
 
