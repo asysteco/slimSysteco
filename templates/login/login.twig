@@ -24,7 +24,7 @@
           </div>
 
           <!-- Login Form -->
-          <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
+          <form id="loginForm">
             <input type="text" id="login" class="fadeIn second" name="Iniciales" placeholder="Usuario (Iniciales)" required>
             <input type="password" id="password" class="fadeIn third" name="pass" placeholder="Contraseña" required>
             <input type="submit" class="fadeIn fourth" value="Iniciar">
@@ -53,5 +53,8 @@
       </div>
     </div>
   </div>
+
+  <script src="media/js/JavaScript/Utility/fetch.js"></script>
+  <script src="media/js/JavaScript/login/login.js"></script>
 </body>
 </html>

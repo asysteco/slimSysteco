@@ -16,20 +16,18 @@ class LoginRedirectMiddleware implements Middleware
      */
     public function process(Request $request, RequestHandler $handler): Response
     {
-        $response = $handler->handle($request);
         $requestUri = $request->getUri()->getPath();
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
         $loginUri = $routeParser->urlFor('login');
-
         if (
             $requestUri === $loginUri ||
             (isset($_COOKIE['user']) && $_COOKIE['user'] === 'logged' && $requestUri !== $loginUri)
         ) {
-            return $response;
+            return $handler->handle($request);
         }
         
 
-        return $response->withHeader('Location', $loginUri)->withStatus(302);
+        return $handler->handle($request)->withHeader('Location', $loginUri)->withStatus(302);
     }
 }
  

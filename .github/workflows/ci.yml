@@ -12,8 +12,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: php-actions/composer@v6
-      with:
-          php_version: 7.4
-          version: 2
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Setup Git Client
+        run: |
+          ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+          git config --global user.email "github-actions@doesnotmatter.dev"
+          git config --global user.name "GitHub Actions"
+
+      - name: GitHub Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
