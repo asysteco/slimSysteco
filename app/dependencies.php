@@ -1,8 +1,7 @@
 <?php
+
 declare(strict_types=1);
 
-use App\Application\Actions\Error\Error404Action;
-use App\Application\Middleware\ValidateSiteMiddleware;
 use App\Application\Settings\SettingsInterface;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
@@ -26,14 +25,10 @@ return function (ContainerBuilder $containerBuilder) {
             $logger->pushHandler($handler);
 
             return $logger;
-        },
-        ValidateSiteMiddleware::class => static function (ContainerInterface $c) {
-            return new ValidateSiteMiddleware(
-                $c->get(Error404Action::class),
-                $c->get('GestReaderConnection')
-            ); 
         }
     ]);
-    require __DIR__ . '/dependencies/DataBaseDependencies.php';
-    require __DIR__ . '/dependencies/TwigDependencies.php';
+    require __DIR__ . '/dependencies/middlewareDependencies.php';
+    require __DIR__ . '/dependencies/dataBaseDependencies.php';
+    require __DIR__ . '/dependencies/twigDependencies.php';
+    require __DIR__ . '/dependencies/repositoryDependencies.php';
 };

@@ -33,6 +33,15 @@ return function (ContainerBuilder $containerBuilder) {
                     'port' => $_ENV['DB_GEST_PORT'],
                     'charset' => $_ENV['DB_GEST_CHARSET']
                 ],
+                'SiteReaderWriter' => [
+                    'engine' => $_ENV['DB_SITE_ENGINE'],
+                    'host' => $_ENV['DB_SITE_HOSTNAME'],
+                    'dbname' => $_ENV['DB_SITE_DBNAME'],
+                    'user' => $_ENV['DB_SITE_USERNAME'],
+                    'password' => $_ENV['DB_SITE_PASSWORD'],
+                    'port' => $_ENV['DB_SITE_PORT'],
+                    'charset' => $_ENV['DB_SITE_CHARSET']
+                ],
             ]);
         },
         'TwigSettings' => function() {

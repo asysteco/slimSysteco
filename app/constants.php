@@ -13,3 +13,6 @@ define('ENVIRONMENT', $_ENV['ENVIRONMENT']);
 define('PRODUCTION', 'production');
 define('TESTING', 'testing');
 define('DEVELOPMENT', 'development');
+
+// MESSAGES
+define('DEFAULT_ERROR', 'Ha ocurrido un error inesperado, contacte con los administradores.');

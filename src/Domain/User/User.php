@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\User;
@@ -8,39 +9,32 @@ use JsonSerializable;
 class User implements JsonSerializable
 {
     private int $id;
-
     private string $username;
+    private string $name;
 
-    private string $firstName;
-
-    private string $lastName;
-
-    public function __construct(int $id, string $username, string $firstName, string $lastName)
-    {
+    public function __construct(
+        int $id,
+        string $username,
+        string $name
+    ) {
         $this->id = $id;
-        $this->username = strtolower($username);
-        $this->firstName = ucfirst($firstName);
-        $this->lastName = ucfirst($lastName);
+        $this->username = $username;
+        $this->name = $name;
     }
 
-    public function getId(): ?int
+    public function id(): int
     {
         return $this->id;
     }
 
-    public function getUsername(): string
+    public function username(): string
     {
         return $this->username;
     }
 
-    public function getFirstName(): string
+    public function name(): string
     {
-        return $this->firstName;
-    }
-
-    public function getLastName(): string
-    {
-        return $this->lastName;
+        return $this->username;
     }
 
     public function jsonSerialize(): array
@@ -48,8 +42,7 @@ class User implements JsonSerializable
         return [
             'id' => $this->id,
             'username' => $this->username,
-            'firstName' => $this->firstName,
-            'lastName' => $this->lastName,
+            'name' => $this->name
         ];
     }
 }

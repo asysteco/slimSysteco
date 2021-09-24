@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-use App\Application\Middleware\LoginRedirectMiddleware;
-use App\Application\Middleware\ValidateSiteMiddleware;
 use Slim\App;
+use App\Application\Middleware\ValidateSiteMiddleware;
 
 return function (App $app) {
-    $app->add(LoginRedirectMiddleware::class)->add(ValidateSiteMiddleware::class);
+    $app->add(ValidateSiteMiddleware::class)
+    ->addBodyParsingMiddleware();
 };

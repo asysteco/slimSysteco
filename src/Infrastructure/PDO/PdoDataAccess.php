@@ -21,7 +21,7 @@ class PdoDataAccess
 
     private function connect(string $dsn, string $user, string $password): void
     {
-        $this->pdo = new PDO($dsn, $user, $password);
+        $this->pdo = new PDO($dsn, $user, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     }
 
     public function beginTransaction(): void
@@ -90,12 +90,13 @@ class PdoDataAccess
 
             foreach ($params as $key => $value) {
                 $castedValue = Utilities::varCaster($value);
-                $query->bindParam(
+                $query->bindValue(
                     $key,
                     $castedValue,
                     $this->getParamType($value)
                 );
             }
+
             $query->execute();
 
             return $query;
