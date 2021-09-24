@@ -37,7 +37,7 @@ class ValidateSiteMiddleware implements Middleware
         try {
             $activeSites = $this->siteReaderRepository->getActiveSites();
         } catch (Exception $e) {
-            return $this->error404Action->execute();
+            return $this->error404Action->__invoke();
         }
         session_start();
 
@@ -64,7 +64,7 @@ class ValidateSiteMiddleware implements Middleware
             );
         }
 
-        return $this->error404Action->execute();
+        return $this->error404Action->__invoke();
     }
 
 

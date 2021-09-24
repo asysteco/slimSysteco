@@ -15,7 +15,7 @@ class Error404Action
         $this->response = $response;
     }
 
-    public function execute(): ResponseInterface
+    public function __invoke(): ResponseInterface
     {
         $this->response->getBody()->write(
             $this->twig->render(
