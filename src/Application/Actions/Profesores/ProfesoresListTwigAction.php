@@ -2,6 +2,7 @@
 
 namespace App\Application\Actions\Profesores;
 
+use App\Infrastructure\Profesor\ProfesorReaderRepositoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Twig\Environment;
@@ -9,25 +10,26 @@ use Twig\Environment;
 class ProfesoresListTwigAction
 {
     private Environment $twig;
+    private ProfesorReaderRepositoryInterface $profesorReaderRepository;
 
-    public function __construct(Environment $twig)
-    {
+    public function __construct(
+        Environment $twig,
+        ProfesorReaderRepositoryInterface $profesorReaderRepository
+    ) {
         $this->twig = $twig;
+        $this->profesorReaderRepository = $profesorReaderRepository;
     }
 
     public function __invoke(RequestInterface $request, ResponseInterface $response): ResponseInterface
     {
+        $profesores = $this->profesorReaderRepository->getProfesorList();
+
         $response->getBody()->write(
             $this->twig->render(
                 'profesores/profesoresListView.twig',
                 [
                     'title' => 'Profesores / Personal',
-                    'profesores' => [(object) [
-                        'id' => 23,
-                        'name' => 'Paco Pérez',
-                        'active' => 1,
-                        'status' => 1
-                    ]]
+                    'profesores' => $profesores
                 ]
             )
         );

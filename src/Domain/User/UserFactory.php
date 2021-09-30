@@ -6,10 +6,10 @@ use App\Domain\User\User;
 
 class UserFactory
 {
-    public static function create(array $site): User {
-        $id = $site['ID'] ?? null;
-        $name = $site['Nombre'] ?? '';
-        $username = $site['Iniciales'] ?? '';
+    public static function create(array $user): User {
+        $id = $user['ID'] ?? null;
+        $name = $user['Nombre'] ?? '';
+        $username = $user['Iniciales'] ?? '';
 
         return new User(
             $id,

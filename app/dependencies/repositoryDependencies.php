@@ -6,8 +6,10 @@ use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
 use App\Infrastructure\Site\SiteReaderRepository;
 use App\Infrastructure\User\UserReaderRepository;
+use App\Infrastructure\Profesor\ProfesorReaderRepository;
 use App\Infrastructure\Site\SiteReaderRepositoryInterface;
 use App\Infrastructure\User\UserReaderRepositoryInterface;
+use App\Infrastructure\Profesor\ProfesorReaderRepositoryInterface;
 
 /** @var ContainerBuilder $containerBuilder */
 $containerBuilder->addDefinitions([
@@ -18,6 +20,11 @@ $containerBuilder->addDefinitions([
     },
     UserReaderRepositoryInterface::class => static function (ContainerInterface $c) {
         return new UserReaderRepository(
+            $c->get('SiteRWConnection')
+        );
+    },
+    ProfesorReaderRepositoryInterface::class => static function (ContainerInterface $c) {
+        return new ProfesorReaderRepository(
             $c->get('SiteRWConnection')
         );
     }

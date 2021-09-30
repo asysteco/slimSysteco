@@ -1,11 +1,15 @@
-{% set id = profesor.id %}
-{% set name = profesor.name %}
-
 <tr nombre='{{ name }}' class='row_prof'>
 	<td data-th='Nombre'>{{ name }}</td>
-	<td data-th='Iniciales'></td>
-	<td data-th='Activo'></td>
-	<td data-th='Sustituido'></td>
+	<td data-th='Iniciales'>
+		{% if type is same as 2 %}
+			<i class="fa fa-graduation-cap" title="Profesorado"></i>
+		{% else %}
+			<i class="fa fa-user personal-icon-azul" title="Personal No Docente"></i>
+		{% endif %}
+		{{ username }}
+	</td>
+	<td data-th='Activo'>{{ active is same as true ? 'Sí' : 'No' }}</td>
+	<td data-th='Sustituido'>{{ sustituted is same as true ? 'Sí' : 'No' }}</td>
 
 	<td data-th='Horario'>
 		<a profesor='{{ id }}' nombre='{{ name }}' title='Editar a {{ name }}' class='act' action='horario'>
