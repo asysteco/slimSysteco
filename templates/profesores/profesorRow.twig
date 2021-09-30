@@ -1,0 +1,69 @@
+{% set id = profesor.id %}
+{% set name = profesor.name %}
+
+<tr nombre='{{ name }}' class='row_prof'>
+	<td data-th='Nombre'>{{ name }}</td>
+	<td data-th='Iniciales'></td>
+	<td data-th='Activo'></td>
+	<td data-th='Sustituido'></td>
+
+	<td data-th='Horario'>
+		<a profesor='{{ id }}' nombre='{{ name }}' title='Editar a {{ name }}' class='act' action='horario'>
+			<i style='font-size: 25px; color: black;' class='fa fa-calendar calendar_icon'></i>
+		</a>
+	</td>
+
+	<td data-th='Editar'>
+		<a profesor='{{ id }}' nombre='{{ name }}' title='Editar a {{ name }}' class='act' action='modal-editar'>
+			<i style='font-size: 25px; color: black;' class='fa fa-pencil-square-o edit_icon'></i>
+		</a>
+	</td>
+
+	<td data-th='Asistencias'>
+		<a profesor='{{ id }}' nombre='{{ name }}' class='act' action='modal-asistencias'>
+			<i style='font-size: 25px; color: black;' class='fa fa-list-ul list_icon'></i>
+		</a>
+	</td>
+
+    {% if profesor.active() is same as 1 %}
+
+        <td data-th='Desactivar / Activar'>
+            <a profesor='{{ id }}' title='Desactivar a {{ name }}' class='act' action='modal-desactivar'>
+                <i style='font-size: 25px; color: red;' class='fa fa-ban remove_icon'></i>
+            </a>
+        </td>
+
+    {% else %}
+
+		<td data-th='Desactivar / Activar'>
+			<a profesor='{{ id }}' title='Activar a {{ name }}' class='act' action='modal-activar'>
+				<i style='font-size: 25px; color: green;' class='fa fa-check add_icon'></i>
+			</a>
+		</td>
+
+    {% endif %}
+
+    {% if profesor.status() is same as 1 %}
+
+        <td data-th='Baja / Alta'>
+			<a profesor='{{ id }}' nombre='{{ name }}' data-baja="2" title='Dar de baja a {{ name }}' class='modal-baja'>
+				<i style='font-size: 25px; color: red;' class='fa fa-ban remove_icon'></i>
+			</a>
+		</td>
+
+    {% else %}
+
+		<td data-th='Baja / Alta'>
+			<a profesor='{{ id }}' nombre='{{ name }}' data-baja="1" title='Dar de alta a {{ name }}' class='modal-baja'>
+				<i style='font-size: 25px; color: green;' class='fa fa-check add_icon'></i>
+			</a>
+		</td>
+
+    {% endif %}
+
+	<td data-th='Reset. Contraseña'>
+		<a profesor='{{ id }}' title='Restablecer contraseña de {{ name }}' class='act' action='modal-reset' nombre='{{ name }}'>
+			<i style='font-size: 25px; color: black;' class='fa fa-refresh reset_icon'></i>
+		</a>
+	</td>
+</tr>

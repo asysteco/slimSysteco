@@ -48,7 +48,8 @@ return function (ContainerBuilder $containerBuilder) {
             return new Settings([
                 'settings' => [
                     'cache' => BASE_PATH . '/templates/cache',
-                    'auto_reload' => ENVIRONMENT === DEVELOPMENT || ENVIRONMENT === TESTING ? true : false
+                    'auto_reload' => ENVIRONMENT === DEVELOPMENT || ENVIRONMENT === TESTING ? true : false,
+                    'debug' => ENVIRONMENT === DEVELOPMENT || ENVIRONMENT === TESTING ? true : false,
                 ],
             ]);
         }

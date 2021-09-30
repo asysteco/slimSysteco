@@ -1,8 +1,9 @@
 var enlace;
 var id;
 var nombre;
+let click = "";
 
-$(document).on('click', '.act', function(e) { 
+$(document).on('click', '.act', function(e) {
     $('#modal-profesores').removeClass('modal-fs');
     $('#modal-size').removeClass('modal-fs');
     $('#modal-cabecera').html('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>');
@@ -25,14 +26,15 @@ $(document).on('click', '.act', function(e) {
             fecha: fecha
         };
     } else if (action === 'horario') {
+        click = $(this);
         id = $(this).attr('profesor');
         nombre = $(this).attr('nombre');
         enlace = '?ACTION=horarios&OPT=profesor';
         data = {profesor: id};
     } else if (action === 'remove-horario') {
         confirmed = confirm('¿Seguro que desea eliminar el horario de este profesor?');
+        $('#modal-profesores').addClass('modal-fs');
         if (!confirmed) {
-            $('#modal-profesores').addClass('modal-fs');
             return;
         }
         id = $(this).attr('profesor');
@@ -60,6 +62,7 @@ $(document).on('click', '.act', function(e) {
         id = $(this).attr('profesor');
         data = {};
     } else if (action === 'modal-asistencias') {
+        click = $(this);
         id = $(this).attr('profesor');
         nombre = $(this).attr('nombre');
         enlace = '?ACTION=asistencias&ID=' + id;
@@ -68,6 +71,7 @@ $(document).on('click', '.act', function(e) {
         enlace = '?ACTION=profesores&OPT=actualizar';
         data = $('#formulario-edit').serialize();
     } else if (action === 'modal-editar') {
+        click = $(this);
         id = $(this).attr('profesor');
         enlace = '?ACTION=profesores&OPT=edit&ID=' + id;
         data = {};
@@ -76,6 +80,7 @@ $(document).on('click', '.act', function(e) {
         enlace = '?ACTION=profesores&OPT=sustituir&ID=' + id;
         data = {};
     } else if (action === 'realizar-sustitucion') {
+        nombre = $(this).attr('nombre');
         idSustituto = $('#select_sustituto').val();
         enlace = '?ACTION=profesores&OPT=add-sustituto';
         data = {

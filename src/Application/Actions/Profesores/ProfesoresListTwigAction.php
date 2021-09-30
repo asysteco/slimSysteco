@@ -19,7 +19,16 @@ class ProfesoresListTwigAction
     {
         $response->getBody()->write(
             $this->twig->render(
-                'main/base-includes.html.twig'
+                'profesores/profesoresListView.twig',
+                [
+                    'title' => 'Profesores / Personal',
+                    'profesores' => [(object) [
+                        'id' => 23,
+                        'name' => 'Paco Pérez',
+                        'active' => 1,
+                        'status' => 1
+                    ]]
+                ]
             )
         );
 
