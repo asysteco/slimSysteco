@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Application\Actions;
-
 trait ActionResponseTrait
 {
     public function buildResponse(bool $success, array $data = [], ?string $message = null): array

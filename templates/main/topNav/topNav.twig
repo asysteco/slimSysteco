@@ -1,5 +1,21 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 
+  {# TWIG ROUTES #}
+  {% set mainActive = 'profesores' %}
+  {% set mainLink = '/profesores' %}
+
+  {% set horariosMenu = 'horarios' %}
+  {% set cursosList = 'cursos' %}
+  {% set cursosListLink = '/cursos' %}
+  {% set aulasList = 'aulas' %}
+  {% set aulasListLink = '/aulas' %}
+
+  {% set profesoresMenu = 'profesores' %}
+  {% set profesoresList = 'profesores' %}
+  {% set profesoresListLink = '/profesores/list' %}
+  {% set profesoresAdd = 'add' %}
+  {% set profesoresAddLink = '/profesores/add' %}
+
   {% if user.type is same as 1 %}
     {% include "main/topNav/adminNav.twig" %}
   {% elseif user.type is same as 2 %}
@@ -10,4 +26,4 @@
 
 </nav>
 
-<script src="media/js/animate.js"></script>
+<script src="/media/js/animate.js"></script>

@@ -1,0 +1,15 @@
+<tr id='fila_{{ id }}' style='text-align: center;'>
+	<td style='vertical-align: middle;'>
+		<input id='input_{{ id }}' type='text' class='form-control hide-it' style='width: 30%; display: none; vertical-align: middle;'>
+		<span id='txt_{{ id }}' class='show-it'> {{ name }} </span>
+		<a id='btn_{{ id }}' data='{{ id }}' class='btn btn-success hide-it update' style='vertical-align: middle; display: none;'>
+			<i class='fa fa-check' aria-hidden='true'></i>
+		</a>
+	</td>
+	<td style='font-size: 25px; vertical-align: middle;'>
+		<span fields='edit_{{ id }}' class='fa fa-pencil-square-o edit'></span>
+	</td>
+	<td style='font-size: 25px; vertical-align: middle;'>
+		<span data='{{ id }}' action='remove' class='fa fa-trash-o remove'></span>
+	</td>
+</tr>

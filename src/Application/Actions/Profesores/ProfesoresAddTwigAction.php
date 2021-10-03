@@ -7,7 +7,7 @@ use Slim\Psr7\Response;
 use App\Infrastructure\Profesor\ProfesorReaderRepositoryInterface;
 use Slim\Views\Twig;
 
-class ProfesoresListTwigAction
+class ProfesoresAddTwigAction
 {
     private Twig $twig;
     private ProfesorReaderRepositoryInterface $profesorReaderRepository;
@@ -23,17 +23,15 @@ class ProfesoresListTwigAction
     public function __invoke(Request $request, Response $response): Response
     {
         $user = $request->getAttribute('user');
-        $profesores = $this->profesorReaderRepository->getProfesorList();
 
         return $this->twig->render(
             $response,
-            'profesores/profesoresListView.twig',
+            'profesores/profesoresAddView.twig',
             [
-                'title' => 'Profesores / Personal',
+                'title' => 'Registrar personal',
                 'menu' => 'profesores',
-                'section' => 'profesores',
-                'user' => $user,
-                'profesores' => $profesores
+                'section' => 'add',
+                'user' => $user
             ]
         );
     }

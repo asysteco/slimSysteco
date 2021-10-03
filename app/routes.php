@@ -6,16 +6,25 @@ use App\Application\Actions\Login\LoginAction;
 use App\Application\Actions\Login\LoginTwigAction;
 use App\Application\Middleware\LoginUserMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
+use App\Application\Actions\Aulas\AulasListTwigAction;
 use App\Application\Middleware\LoginRedirectMiddleware;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
+use App\Application\Actions\Profesores\ProfesoresAddTwigAction;
 use App\Application\Actions\Profesores\ProfesoresListTwigAction;
 
 return function (App $app) {
     $app->group('', function (Group $group) {
+        $group->get('/cursos', ProfesoresAddTwigAction::class)->setName('cursos-list')
+            ->add(LoginUserMiddleware::class);
+
+        $group->get('/aulas', AulasListTwigAction::class)->setName('aulas-list')
+            ->add(LoginUserMiddleware::class);
+
         $group->group('/profesores', function (Group $group) {
             $group->get('', ProfesoresListTwigAction::class)->setName('profesores-main');
-            $group->get('/lista', ProfesoresListTwigAction::class)->setName('profesores-list');
+            $group->get('/list', ProfesoresListTwigAction::class)->setName('profesores-list');
+            $group->get('/add', ProfesoresAddTwigAction::class)->setName('profesores-add');
             
         })->add(LoginUserMiddleware::class);
 

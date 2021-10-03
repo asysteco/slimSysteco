@@ -1,0 +1,50 @@
+{% include "main/header.twig" %}
+{% include "main/topNav/topNav.twig" %}
+
+<body>
+
+    <div class="container">
+        <div class='row'>
+            <div class='col-12'>
+                <h1>Gestión de Aulas</h1>
+                <div class="input-group mb-3">
+                    <input id="add-aula" type="text" class="form-control" placeholder="Escribe el nombre del nuevo aula..." aria-label="Escribe el nombre del nuevo aula...">
+                    <div class="input-group-append">
+                        <a id="add-btn-aula" action="add" class="btn btn-success" type="button">Añadir Aula</a>
+                    </div>
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr style="text-align: center;">
+                            <th style="text-align: center;">Nombre</th>
+                            <th style="text-align: center;">Editar</th>
+                            <th style="text-align: center;">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    {% if aulas is not empty %}
+                        {% for aula in aulas %}
+                            {% set id = aula.id() %}
+                            {% set name = aula.name() %}
+
+                            {% include "aulas/aulaRow.twig" %}
+                        {% endfor %}
+                    {% else %}
+                        <tr style='text-align: center;'>
+                            <td colspan='100%'><h3>No existen aulas.</h3></td>
+                        </tr>
+                    {% endif %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="/media/js/edit-aulas.js"></script>
+
+</body>
+
+{% include "main/footer.twig" %}

@@ -1,9 +1,4 @@
-{% set mainActive = 'profesores' %}
-{% set mainLink = '/profesores' %}
-{% set profesoresActive = 'profesores' %}
-{% set profesoresLink = '/profesores/lista' %}
-
-<a class="navbar-brand" href="{{ profesoresLink }}"></a>
+<a class="navbar-brand" href="{{ profesoresListLink }}"></a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#top-menu" aria-controls="top-menu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
 </button>
@@ -19,14 +14,14 @@
         <!-- Home end -->
 
         <!-- Horarios Dropdown start -->
-        <li class="nav-item dropdown <?= $act_horario ?>">
+        <li class="nav-item dropdown {{ menu is same as horariosMenu ? 'active' : null }}">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> Horario</a>
             <ul class="dropdown-menu bg-dark">
-                <a class="dropdown-item text-light <?= $act_gestCursos ?>" href="<?= $gestCursos ?>">
+                <a class="dropdown-item text-light {{ section is same as cursosList ? 'active' : null }}" href="{{ cursosListLink }}">
                     <i style="font-size: 20px; vertical-align: middle;" class="fa fa-pencil-square-o"></i>
                     <span style="vertical-align: middle;"> Gestionar Cursos</span>
                 </a>
-                <a class="dropdown-item text-light <?= $act_gestAulas ?>" href="<?= $gestAulas ?>">
+                <a class="dropdown-item text-light {{ section is same as aulasList ? 'active' : null }}" href="{{ aulasListLink }}">
                     <i style="font-size: 20px; vertical-align: middle;" class="fa fa-pencil-square-o"></i>
                     <span style="vertical-align: middle;"> Gestionar Aulas</span>
                 </a>
@@ -40,14 +35,14 @@
         <!-- Horarios Dropdown start -->
 
         <!-- Profesores Dropdown start -->
-        <li class="nav-item dropdown {{ section is same as 'profesores' ? 'active' : null }}">
+        <li class="nav-item dropdown {{ menu is same as profesoresMenu ? 'active' : null }}">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> Personal</a>
             <ul class="dropdown-menu bg-dark">
-                <a class="dropdown-item text-light {{ section is same as 'profesores' ? 'active' : null }}" href="{{ profesoresLink }}">
+                <a class="dropdown-item text-light {{ section is same as profesoresList ? 'active' : null }}" href="{{ profesoresListLink }}">
                     <i style="font-size: 20px; vertical-align: middle;" class="fa fa-eye"></i>
                     <span style="vertical-align: middle;"> Mostrar Personal</span>
                 </a>
-                <a class="dropdown-item text-light <?= $act_addProf ?>" href="<?= $addProfesores ?>">
+                <a class="dropdown-item text-light {{ section is same as profesoresAdd ? 'active' : null }}" href="{{ profesoresAddLink }}">
                     <i style="font-size: 20px; vertical-align: middle;" class="fa fa-plus"></i>
                     <span style="vertical-align: middle;"> Añadir Personal</span>
                 </a>
@@ -85,7 +80,8 @@
         <li class="nav-item dropdown <?= $act_usuario ?>">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                 <i style="vertical-align: middle;" class="fa fa-user-o"></i>
-                <?= $sessionName . ' ' . $notificacion . ' ' . $notificacion_alert ?>
+                {{ user.name }}
+                <?= $notificacion . ' ' . $notificacion_alert ?>
             </a>
             <ul class="dropdown-menu dropdown-menu-right bg-dark">
                 <a class="dropdown-item text-light <?= $act_qr ?>" href="<?= $qrCode ?>">
