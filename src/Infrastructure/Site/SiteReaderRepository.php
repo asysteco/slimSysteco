@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Site;
 
+use App\Domain\Sites\Site;
 use App\Domain\Sites\SiteFactory;
 use App\Infrastructure\PDO\PdoDataAccess;
 use App\Infrastructure\Site\SiteReaderRepositoryInterface;
@@ -37,5 +38,18 @@ class SiteReaderRepository implements SiteReaderRepositoryInterface
         }
 
         return $sites;
+    }
+
+    public function getSiteInfoByName(string $siteName): Site
+    {
+        $sql = "SELECT * FROM Centros WHERE Activo = :active AND Nombre = :siteName";
+        $params = [
+            ':active' => 1,
+            ':siteName' => $siteName
+        ];
+
+        $result = $this->pdo->query($sql, $params, true);
+
+        return SiteFactory::create($result);
     }
 }

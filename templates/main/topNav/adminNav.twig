@@ -26,7 +26,7 @@
                     <span style="vertical-align: middle;"> Gestionar Aulas</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-light <?= $act_importHorarios ?>" href="<?= $importHorarios ?>">
+                <a class="dropdown-item text-light {{ section is same as horariosImport ? 'active' : null }}" href="{{ horariosImportLink }}">
                     <i style="font-size: 20px; vertical-align: middle;" class="fa fa-cloud-upload"></i>
                     <span style="vertical-align: middle;"> Importar horarios</span>
                 </a>

@@ -11,6 +11,7 @@ use App\Application\Middleware\LoginRedirectMiddleware;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Application\Actions\Cursos\CursosListTwigAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
+use App\Application\Actions\Horarios\HorariosImportTwigAction;
 use App\Application\Actions\Profesores\ProfesoresAddTwigAction;
 use App\Application\Actions\Profesores\ProfesoresListTwigAction;
 
@@ -21,6 +22,10 @@ return function (App $app) {
 
         $group->get('/aulas', AulasListTwigAction::class)->setName('aulas-list')
             ->add(LoginUserMiddleware::class);
+            
+        $group->group('/horarios', function (Group $group) {
+            $group->get('/import', HorariosImportTwigAction::class)->setName('horarios-import');
+        })->add(LoginUserMiddleware::class);
 
         $group->group('/profesores', function (Group $group) {
             $group->get('', ProfesoresListTwigAction::class)->setName('profesores-main');

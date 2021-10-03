@@ -31,6 +31,36 @@ class SiteOptions implements JsonSerializable
         $this->autoScroll = $autoScroll;
     }
 
+    public function dailyQr(): ?int
+    {
+        return $this->dailyQr;
+    }
+
+    public function googleQr(): ?int
+    {
+        return $this->googleQr;
+    }
+
+    public function ficharSalida(): ?int
+    {
+        return $this->ficharSalida;
+    }
+
+    public function qrReader(): ?int
+    {
+        return $this->qrReader;
+    }
+
+    public function edificios(): ?int
+    {
+        return $this->edificios;
+    }
+
+    public function autoScroll(): ?int
+    {
+        return $this->autoScroll;
+    }
+
     public function jsonSerialize(): array
     {
         return [
