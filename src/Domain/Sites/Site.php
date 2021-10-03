@@ -32,7 +32,7 @@ class Site implements JsonSerializable
         return $this->name;
     }
 
-    public function options(): string
+    public function options(): ?SiteOptions
     {
         return $this->options;
     }
