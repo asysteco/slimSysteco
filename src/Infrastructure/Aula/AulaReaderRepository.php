@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Infrastructure\Aulas;
+namespace App\Infrastructure\Aula;
 
-use App\Domain\Aulas\AulasFactory;
+use App\Domain\Aula\AulaFactory;
 use App\Infrastructure\PDO\PdoDataAccess;
-use App\Infrastructure\Aulas\AulasReaderRepositoryInterface;
+use App\Infrastructure\Aula\AulaReaderRepositoryInterface;
 
-class AulasReaderRepository implements AulasReaderRepositoryInterface
+class AulaReaderRepository implements AulaReaderRepositoryInterface
 {
     private PdoDataAccess $pdo;
 
@@ -21,6 +21,6 @@ class AulasReaderRepository implements AulasReaderRepositoryInterface
 
         $result = $this->pdo->query($sql);
 
-        return AulasFactory::createFromResultSet($result);
+        return AulaFactory::createFromResultSet($result);
     }
 }

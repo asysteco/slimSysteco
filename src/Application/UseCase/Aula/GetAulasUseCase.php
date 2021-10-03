@@ -2,19 +2,19 @@
 
 namespace App\Application\UseCase\Aula;
 
-use App\Infrastructure\Aulas\AulasReaderRepositoryInterface;
+use App\Infrastructure\Aula\AulaReaderRepositoryInterface;
 
 class GetAulasUseCase
 {
-    private AulasReaderRepositoryInterface $aulasReaderRepository;
+    private AulaReaderRepositoryInterface $aulaReaderRepository;
 
-    public function __construct(AulasReaderRepositoryInterface $aulasReaderRepository)
+    public function __construct(AulaReaderRepositoryInterface $aulaReaderRepository)
     {
-        $this->aulasReaderRepository = $aulasReaderRepository;
+        $this->aulaReaderRepository = $aulaReaderRepository;
     }
 
     public function execute(): array
     {
-        return $this->aulasReaderRepository->getAulas();
+        return $this->aulaReaderRepository->getAulas();
     }
 }

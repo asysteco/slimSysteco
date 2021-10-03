@@ -1,39 +1,39 @@
 <?php
 
-namespace App\Application\Actions\Profesores;
+namespace App\Application\Actions\Cursos;
 
+use App\Application\UseCase\Curso\GetCursosUseCase;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
-use App\Infrastructure\Profesor\ProfesorReaderRepositoryInterface;
 use Slim\Views\Twig;
 
-class ProfesoresAddTwigAction
+class CursosListTwigAction
 {
     private Twig $twig;
-    private ProfesorReaderRepositoryInterface $profesorReaderRepository;
+    private GetCursosUseCase $getCursosUseCase;
 
     public function __construct(
         Twig $twig,
-        ProfesorReaderRepositoryInterface $profesorReaderRepository
+        GetCursosUseCase $getCursosUseCase
     ) {
         $this->twig = $twig;
-        $this->profesorReaderRepository = $profesorReaderRepository;
+        $this->getCursosUseCase = $getCursosUseCase;
     }
 
     public function __invoke(Request $request, Response $response): Response
     {
         $user = $request->getAttribute('user');
-        $profesores = $this->profesorReaderRepository->getProfesorList();
+        $cursos = $this->getCursosUseCase->execute();
 
         return $this->twig->render(
             $response,
-            'profesores/profesoresAddView.twig',
+            'cursos/cursosView.twig',
             [
-                'title' => 'Registrar personal',
-                'menu' => 'profesores',
-                'section' => 'add',
+                'title' => 'Gestionar Cursos',
+                'menu' => 'horarios',
+                'section' => 'cursos',
                 'user' => $user,
-                'profesores' => $profesores
+                'cursos' => $cursos
             ]
         );
     }

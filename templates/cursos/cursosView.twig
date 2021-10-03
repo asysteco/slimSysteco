@@ -1,0 +1,50 @@
+{% include "main/header.twig" %}
+{% include "main/topNav/topNav.twig" %}
+
+<body>
+
+    <div class="container">
+        <div class='row'>
+            <div class='col-12'>
+                <h1>Gestión de Cursos</h1>
+                <div class="input-group mb-3">
+                    <input id="add-curso" type="text" class="form-control" placeholder="Escribe el nombre del nuevo curso..." aria-label="Escribe el nombre del nuevo curso...">
+                    <div class="input-group-append">
+                        <a id="add-btn" action="add" class="btn btn-success" type="button">Añadir Curso</a>
+                    </div>
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr style="text-align: center;">
+                            <th style="text-align: center;">Nombre</th>
+                            <th style="text-align: center;">Editar</th>
+                            <th style="text-align: center;">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    {% if cursos is not empty %}
+                        {% for curso in cursos %}
+                            {% set id = curso.id() %}
+                            {% set name = curso.name() %}
+
+                            {% include "cursos/cursoRow.twig" %}
+                        {% endfor %}
+                    {% else %}
+                        <tr style='text-align: center;'>
+                            <td colspan='100%'><h3>No existen cursos.</h3></td>
+                        </tr>
+                    {% endif %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="/media/js/edit-cursos.js"></script>
+
+</body>
+
+{% include "main/footer.twig" %}

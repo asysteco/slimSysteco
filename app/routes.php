@@ -9,13 +9,14 @@ use Psr\Http\Message\ResponseInterface as Response;
 use App\Application\Actions\Aulas\AulasListTwigAction;
 use App\Application\Middleware\LoginRedirectMiddleware;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use App\Application\Actions\Cursos\CursosListTwigAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\Profesores\ProfesoresAddTwigAction;
 use App\Application\Actions\Profesores\ProfesoresListTwigAction;
 
 return function (App $app) {
     $app->group('', function (Group $group) {
-        $group->get('/cursos', ProfesoresAddTwigAction::class)->setName('cursos-list')
+        $group->get('/cursos', CursosListTwigAction::class)->setName('cursos-list')
             ->add(LoginUserMiddleware::class);
 
         $group->get('/aulas', AulasListTwigAction::class)->setName('aulas-list')
