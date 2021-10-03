@@ -1,11 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 
-{% set type = 1 %}
-  {% if type is same as 1 %}
+  {% if user.type is same as 1 %}
     {% include "main/topNav/adminNav.twig" %}
-  {% elseif type is same as 2 %}
+  {% elseif user.type is same as 2 %}
     {% include "main/topNav/profesorNav.twig" %}
-  {% elseif type is same as 3 %}
+  {% elseif user.type is same as 3 %}
     {% include "main/topNav/personalNav.twig" %}
   {% endif %}
 

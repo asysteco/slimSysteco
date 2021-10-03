@@ -2,38 +2,38 @@
 
 namespace App\Application\Actions\Profesores;
 
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 use App\Infrastructure\Profesor\ProfesorReaderRepositoryInterface;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Twig\Environment;
+use Slim\Views\Twig;
 
 class ProfesoresListTwigAction
 {
-    private Environment $twig;
+    private Twig $twig;
     private ProfesorReaderRepositoryInterface $profesorReaderRepository;
 
     public function __construct(
-        Environment $twig,
+        Twig $twig,
         ProfesorReaderRepositoryInterface $profesorReaderRepository
     ) {
         $this->twig = $twig;
         $this->profesorReaderRepository = $profesorReaderRepository;
     }
 
-    public function __invoke(RequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function __invoke(Request $request, Response $response): Response
     {
+        $user = $request->getAttribute('user');
         $profesores = $this->profesorReaderRepository->getProfesorList();
 
-        $response->getBody()->write(
-            $this->twig->render(
-                'profesores/profesoresListView.twig',
-                [
-                    'title' => 'Profesores / Personal',
-                    'profesores' => $profesores
-                ]
-            )
+        return $this->twig->render(
+            $response,
+            'profesores/profesoresListView.twig',
+            [
+                'title' => 'Profesores / Personal',
+                'section' => 'profesores',
+                'user' => $user,
+                'profesores' => $profesores
+            ]
         );
-
-        return $response;
     }
 }

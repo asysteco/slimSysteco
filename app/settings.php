@@ -51,6 +51,17 @@ return function (ContainerBuilder $containerBuilder) {
                     'auto_reload' => ENVIRONMENT === DEVELOPMENT || ENVIRONMENT === TESTING ? true : false,
                     'debug' => ENVIRONMENT === DEVELOPMENT || ENVIRONMENT === TESTING ? true : false,
                 ],
+                'assetOptions' => [
+                    // Public assets cache directory
+                    'path' => BASE_PATH . '/public/media/cache',
+                    // Public url base path
+                    'url_base_path' => 'cache/',
+                    // Internal cache directory for the assets
+                    'cache_path' => BASE_PATH . '/templates/cache',
+                    'cache_name' => 'assets-cache',
+                    //  Should be set to 1 (enabled) in production
+                    'minify' => 1,
+                ]
             ]);
         }
     ]);

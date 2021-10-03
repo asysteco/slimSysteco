@@ -17,6 +17,7 @@ class LoginAction
     use ActionResponseTrait;
 
     private const SESSION_ID = 'session-id';
+    private const USER_ID = 'user-id';
     private const COOKIE_SESSION = 'session';
     private const ROOT_PATH = '/';
 
@@ -61,6 +62,7 @@ class LoginAction
     {
         $hash = sha1($user->id() . date('Ymd'));
         $_SESSION[self::SESSION_ID] = $hash;
+        $_SESSION[self::USER_ID] = $user->id();
 
         return $hash;
     }

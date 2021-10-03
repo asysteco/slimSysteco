@@ -47,6 +47,7 @@ class ValidateSiteMiddleware implements Middleware
             in_array($siteCookie->getValue(), $activeSites, true) &&
             (isset($_SESSION[self::SESSION_VALUE]) && $_SESSION[self::SESSION_VALUE] === $siteCookie->getValue())
         ) {
+            $request->withAttribute(self::SESSION_VALUE, $siteCookie->getValue());
             return $handler->handle($request);
         }
 

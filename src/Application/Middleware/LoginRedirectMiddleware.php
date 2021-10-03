@@ -5,7 +5,6 @@ namespace App\Application\Middleware;
 
 use Slim\Routing\RouteContext;
 use Dflydev\FigCookies\FigRequestCookies;
-use Dflydev\FigCookies\FigResponseCookies;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Server\MiddlewareInterface as Middleware;
 use Psr\Http\Message\ServerRequestInterface as Request;

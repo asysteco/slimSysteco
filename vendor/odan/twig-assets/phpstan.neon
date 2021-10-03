@@ -1,0 +1,4 @@
+parameters:
+	checkMissingIterableValueType: false
+	ignoreErrors:
+		- '/Cannot call method getAttribute\(\) on DOMElement\|null/'

@@ -1,4 +1,9 @@
-<a class="navbar-brand" href="<?= $index ?>"></a>
+{% set mainActive = 'profesores' %}
+{% set mainLink = '/profesores' %}
+{% set profesoresActive = 'profesores' %}
+{% set profesoresLink = '/profesores/lista' %}
+<h1>hi<base href="{{ base_path() }}/"/></h1>
+<a class="navbar-brand" href="{{ profesoresLink }}"></a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#top-menu" aria-controls="top-menu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
 </button>
@@ -8,8 +13,8 @@
     <ul class="navbar-nav mr-auto">
 
         <!-- Home start -->
-        <li class="nav-item <?= $act_home ?>">
-            <a class="nav-link" href="<?= $index ?>"> Inicio</a>
+        <li class="nav-item {{ section is same as mainActive ? 'active' : null }}">
+            <a class="nav-link" href="{{ mainLink }}"> Inicio</a>
         </li>
         <!-- Home end -->
 
@@ -35,10 +40,10 @@
         <!-- Horarios Dropdown start -->
 
         <!-- Profesores Dropdown start -->
-        <li class="nav-item dropdown <?= $act_profesores ?>">
+        <li class="nav-item dropdown {{ section is same as 'profesores' ? 'active' : null }}">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> Personal</a>
             <ul class="dropdown-menu bg-dark">
-                <a class="dropdown-item text-light <?= $act_showProf ?>" href="<?= $profesores ?>">
+                <a class="dropdown-item text-light {{ section is same as 'profesores' ? 'active' : null }}" href="{{ profesoresLink }}">
                     <i style="font-size: 20px; vertical-align: middle;" class="fa fa-eye"></i>
                     <span style="vertical-align: middle;"> Mostrar Personal</span>
                 </a>
