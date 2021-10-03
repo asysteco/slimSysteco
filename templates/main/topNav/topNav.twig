@@ -9,7 +9,7 @@
   {% set cursosListLink = '/cursos' %}
   {% set aulasList = 'aulas' %}
   {% set aulasListLink = '/aulas' %}
-  {% set horariosImport = 'import' %}
+  {% set horariosImport = 'importHorarios' %}
   {% set horariosImportLink = '/horarios/import' %}
 
   {% set profesoresMenu = 'profesores' %}
@@ -17,6 +17,8 @@
   {% set profesoresListLink = '/profesores/list' %}
   {% set profesoresAdd = 'add' %}
   {% set profesoresAddLink = '/profesores/add' %}
+  {% set profesoresImport = 'importProfesores' %}
+  {% set profesoresImportLink = '/profesores/import' %}
 
   {% if user.type is same as 1 %}
     {% include "main/topNav/adminNav.twig" %}

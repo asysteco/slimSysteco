@@ -32,7 +32,7 @@ class HorariosImportTwigAction
             [
                 'title' => 'Importar Horarios',
                 'menu' => 'horarios',
-                'section' => 'import',
+                'section' => 'importHorarios',
                 'user' => $user,
                 'siteInfo' => $data['siteInfo'],
                 'franjas' => $data['franjas'],

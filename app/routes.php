@@ -14,6 +14,7 @@ use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\Horarios\HorariosImportTwigAction;
 use App\Application\Actions\Profesores\ProfesoresAddTwigAction;
 use App\Application\Actions\Profesores\ProfesoresListTwigAction;
+use App\Application\Actions\Profesores\ProfesoresImportTwigAction;
 
 return function (App $app) {
     $app->group('', function (Group $group) {
@@ -31,6 +32,7 @@ return function (App $app) {
             $group->get('', ProfesoresListTwigAction::class)->setName('profesores-main');
             $group->get('/list', ProfesoresListTwigAction::class)->setName('profesores-list');
             $group->get('/add', ProfesoresAddTwigAction::class)->setName('profesores-add');
+            $group->get('/import', ProfesoresImportTwigAction::class)->setName('profesores-import');
             
         })->add(LoginUserMiddleware::class);
 
