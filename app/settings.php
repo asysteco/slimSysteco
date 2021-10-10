@@ -13,11 +13,11 @@ return function (ContainerBuilder $containerBuilder) {
         SettingsInterface::class => function () {
             return new Settings([
                 'displayErrorDetails' => ENVIRONMENT === DEVELOPMENT || ENVIRONMENT === TESTING ? true : false,
-                'logError'            => false,
-                'logErrorDetails'     => false,
+                'logError'            => true,
+                'logErrorDetails'     => true,
                 'logger' => [
                     'name' => 'asysteco-app',
-                    'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/asysteco-app.log',
+                    'path' => __DIR__ . '/../logs/asysteco-app.log',
                     'level' => Logger::DEBUG,
                 ],
             ]);
