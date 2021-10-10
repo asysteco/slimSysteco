@@ -20,12 +20,14 @@ $containerBuilder->addDefinitions([
     },
     'SiteRWConnection' => static function (ContainerInterface $c) {
         $settings = $c->get('DataBaseSettings')->get('SiteReaderWriter');
+        $siteConfig = $_SESSION['site-db'];
+
         $dsn = $settings['engine'] .
-            ':host=' . $settings['host'] .
-            ';dbname=' . $settings['dbname'] .
+            ':host=' . $siteConfig[0]['Info'] .
+            ';dbname=' . $siteConfig[3]['Info'] .
             ';port=' . $settings['port'] .
             ';charset=' . $settings['charset'];
 
-        return new PdoDataAccess($dsn, $settings['user'], $settings['password']);
+            return new PdoDataAccess($dsn, $siteConfig[1]['Info'], $siteConfig[2]['Info']);
     }
 ]);

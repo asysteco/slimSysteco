@@ -39,7 +39,7 @@ class PdoDataAccess
         $this->pdo->rollBack();
     }
 
-    public function query(string $sqlToPrepare, array $params = [], bool $singleRow = null): ?array
+    public function query(string $sqlToPrepare, array $params = [], bool $singleRow = null): array
     {
         try {
             $query = $this->callToExecute($sqlToPrepare, $params);
@@ -52,7 +52,7 @@ class PdoDataAccess
             throw new PDOQueryException();
         }
 
-        return !empty($response) ? $response : null;
+        return !empty($response) ? $response : [];
     }
 
     public function queryAsObject(string $sqlToPrepare, array $params = [], bool $singleRow = null)

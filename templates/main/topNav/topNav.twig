@@ -20,6 +20,8 @@
   {% set profesoresImport = 'importProfesores' %}
   {% set profesoresImportLink = '/profesores/import' %}
 
+  {% set logoutLink = '/logout' %}
+
   {% if user.type is same as 1 %}
     {% include "main/topNav/adminNav.twig" %}
   {% elseif user.type is same as 2 %}

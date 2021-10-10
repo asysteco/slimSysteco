@@ -18,7 +18,8 @@ async function sendLogin() {
         username: username,
         password: password
     };
-    
+
+    loadingOn();
     const response = await fetch(loginUrl, {
       method: 'POST',
       body: JSON.stringify(loginData),
@@ -31,10 +32,12 @@ async function sendLogin() {
       if (res.success) {
         location.href = mainRoute;
       } else {
-        toastr["warning"]("Iniciales y/o contraseña incorrectos", defaultErrorTitle);
+        loadingOff();
+        toastr["error"]("Iniciales y/o contraseña incorrectos", defaultErrorTitle);
       }
     })
     .catch(function () {
+      loadingOff();
       toastr["error"](defaultCatchMessage, defaultErrorTitle)
     });
 }

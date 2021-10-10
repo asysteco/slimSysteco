@@ -9,6 +9,8 @@ use App\Infrastructure\Site\SiteReaderRepositoryInterface;
 
 class SiteReaderRepository implements SiteReaderRepositoryInterface
 {
+    private const ACTIVE_SITE_STATUS = 1;
+
     private PdoDataAccess $pdo;
 
     public function __construct(PdoDataAccess $pdo)
@@ -21,7 +23,7 @@ class SiteReaderRepository implements SiteReaderRepositoryInterface
         $sites = [];
         $sql = "SELECT ID, Nombre FROM Centros WHERE Activo = :active";
         $params = [
-            ':active' => 1
+            ':active' => self::ACTIVE_SITE_STATUS
         ];
 
         $result = $this->pdo->query($sql, $params);
@@ -44,12 +46,31 @@ class SiteReaderRepository implements SiteReaderRepositoryInterface
     {
         $sql = "SELECT * FROM Centros WHERE Activo = :active AND Nombre = :siteName";
         $params = [
-            ':active' => 1,
+            ':active' => self::ACTIVE_SITE_STATUS,
             ':siteName' => $siteName
         ];
 
         $result = $this->pdo->query($sql, $params, true);
 
         return SiteFactory::create($result);
+    }
+
+    public function getSiteDbConfig(string $siteName): array
+    {
+        $sql = "SELECT d.Data, d.Info 
+        FROM DBConfig d 
+            INNER JOIN Centros c ON d.IdCentro = c.ID 
+        WHERE c.Nombre = :siteName
+	        AND c.Activo = :active
+        ORDER BY d.Data";
+
+        $params = [
+            ':active' => self::ACTIVE_SITE_STATUS,
+            ':siteName' => $siteName
+        ];
+
+        $result = $this->pdo->query($sql, $params);
+
+        return !empty($result) ? $result : [];
     }
 }

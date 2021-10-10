@@ -32,17 +32,23 @@
                 </thead>
                 <tbody>
 
-                {% for profesor in profesores %}
-                    {% set id = profesor.id %}
-                    {% set username = profesor.username %}
-                    {% set name = profesor.name %}
-                    {% set type = profesor.type %}
-                    {% set active = profesor.active %}
-                    {% set sustituted = profesor.sustituted %}
-                    {% set status = profesor.status %}
+                {% if profesores is not empty %}
+                    {% for profesor in profesores %}
+                        {% set id = profesor.id %}
+                        {% set username = profesor.username %}
+                        {% set name = profesor.name %}
+                        {% set type = profesor.type %}
+                        {% set active = profesor.active %}
+                        {% set sustituted = profesor.sustituted %}
+                        {% set status = profesor.status %}
 
-                    {% include "profesores/profesorRow.twig" %}
-                {% endfor %}
+                        {% include "profesores/profesorRow.twig" %}
+                    {% endfor %}
+                {% else %}
+                    <tr class='row_prof'>
+                        <td colspan='100%'> No hay profesores</td>
+                    </tr>
+                {% endif %}
 
                 </tbody>
             </table>

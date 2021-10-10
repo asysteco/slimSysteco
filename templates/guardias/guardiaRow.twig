@@ -1,0 +1,14 @@
+<tr id='fila_{{ row }}'>
+    <td style='width: 5%;'>{{ row }}</td>
+    <td style='width: 15%;'>{{ start }} - {{ end }}</td>
+
+    {% if edificios > 1 %}
+        <td style='width: 45%;'>{{ name }}</td>
+        <td style='width: 5%;'>{{ edificio }}</td>
+    {% else %}
+        <td style='width: 50%;'>{{ name }}</td>
+    {% endif %}
+    
+    <td style='width: 15%;'><b>{{ aula }}</b></td>
+    <td style='width: 15%;'><b>{{ cursos }}</b></td>
+</tr>

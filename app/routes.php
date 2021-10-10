@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use Slim\App;
 use App\Application\Actions\Login\LoginAction;
+use App\Application\Actions\Login\LogoutAction;
 use App\Application\Actions\Login\QrLoginAction;
 use App\Application\Actions\Login\LoginTwigAction;
 use App\Application\Middleware\LoginUserMiddleware;
@@ -13,12 +14,15 @@ use App\Application\Middleware\LoginRedirectMiddleware;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Application\Actions\Cursos\CursosListTwigAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
+use App\Application\Actions\Guardias\GuardiasListTwigAction;
 use App\Application\Actions\Horarios\HorariosImportTwigAction;
 use App\Application\Actions\Profesores\ProfesoresAddTwigAction;
 use App\Application\Actions\Profesores\ProfesoresListTwigAction;
 use App\Application\Actions\Profesores\ProfesoresImportTwigAction;
 
 return function (App $app) {
+    $app->get('/logout', LogoutAction::class)->setName('logout');
+
     $app->group('', function (Group $group) {
         $group->get('/cursos', CursosListTwigAction::class)->setName('cursos-list')->add(LoginUserMiddleware::class);
 
@@ -37,15 +41,15 @@ return function (App $app) {
 
         $group->get('/login', LoginTwigAction::class)->setName('login');
 
-        $group->get('/guardias', AulasListTwigAction::class)->setName('guardias-main');
+        $group->get('/guardias', GuardiasListTwigAction::class)->setName('guardias-main');
 
-        $group->get('/{site:[a-zA-Z]+}', function (Request $request, Response $response) {
+        $group->get('/{site:[a-zA-Z-]+}', function (Request $request, Response $response) {
             return $response->withAddedHeader('Location', '/profesores');
         });
     })->add(LoginRedirectMiddleware::class);
 
     
-    $app->get('/reader/{site:[a-zA-Z]+}', QrLoginTwigAction::class);
+    $app->get('/reader/{site:[a-zA-Z-]+}', QrLoginTwigAction::class);
 
     $app->group('/xhr', function(Group $group) {
         $group->post('/login', LoginAction::class);

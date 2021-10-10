@@ -8,4 +8,5 @@ interface SiteReaderRepositoryInterface
 {
     public function getActiveSites(): array;
     public function getSiteInfoByName(string $siteName): Site;
+    public function getSiteDbConfig(string $siteName): array;
 }

@@ -1,0 +1,69 @@
+{% extends "base.twig" %}
+{% set edificios = siteOptions.edificios() %}
+
+{% block headScripts %}
+    <link rel="stylesheet" href="/media/css/qr-reader.css">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class='row'>
+            <div id='qreader' class='col-12 col-md-4' style='padding-top: 35vh;'>
+                <div id="output" class="respuesta">
+                    <span id="empty">
+                        <h3>Acerque el código QR al lector...</h3>
+                    </span>
+                </div>
+
+            </div>
+            <div class='col-12 col-md-8' style='text-align: center;'>
+                <div class="table-responsive">
+                    <table id="listado-guardias" class="table table-striped">
+                        <thead id="fila_cabecera" class="thead-dark">
+                            <tr>
+                                <th style="width: 5%;">Fila</th>
+                                <th style="width: 15%;">Hora</th>
+
+                                {% if edificios > 1 %}
+                                    <th style="width: 45%;">Profesor</th>
+                                    <th style="width: 5%;">Edificio</th>
+                                {% else %}
+                                    <th style="width: 50%;">Profesor</th>
+                                {% endif %}
+
+                                <th style="width: 15%;">Aula</th>
+                                <th style="width: 15%;">Grupo</th>
+                            </tr>
+                        </thead>
+                        <tbody class="scroller">
+
+                {% if guardias is not empty %}
+                    {% set row = 0 %}
+                    {% for guardia in guardias %}
+                        {% set row = row + 1 %}
+                        {% set name = guardia['Nombre'] %}
+                        {% set start = guardia['Inicio'] %}
+                        {% set end = guardia['Fin'] %}
+                        {% set aula = guardia['Aula'] %}
+                        {% set cursos = guardia['Grupos'] %}
+                        {% include "guardias/guardiaRow.twig" %}
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="100%">No hay aulas sin cubrir</td>
+                    </tr>
+                {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block bodyScripts %}
+    <script src="/media/js/qr-reader.js"></script>
+{% endblock %}

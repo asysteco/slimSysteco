@@ -37,10 +37,6 @@ class ProfesorReaderRepository implements ProfesorReaderRepositoryInterface
 
         $result = $this->pdo->query($sql);
 
-        if (!empty($result)) {
-            return ProfesorFactory::createFromResultSet($result);
-        }
-
-        return [];
+        return ProfesorFactory::createFromResultSet($result);
     }
 }

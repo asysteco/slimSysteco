@@ -14,6 +14,8 @@ use App\Infrastructure\Site\SiteReaderRepositoryInterface;
 use App\Infrastructure\User\UserReaderRepositoryInterface;
 use App\Infrastructure\Profesor\ProfesorReaderRepositoryInterface;
 use App\Infrastructure\Curso\CursoReaderRepositoryInterface;
+use App\Infrastructure\Guardias\GuardiasReaderRepository;
+use App\Infrastructure\Guardias\GuardiasReaderRepositoryInterface;
 use App\Infrastructure\Horario\HorarioReaderRepository;
 use App\Infrastructure\Horario\HorarioReaderRepositoryInterface;
 use App\Infrastructure\Horas\HorasReaderRepository;
@@ -53,6 +55,11 @@ $containerBuilder->addDefinitions([
     },
     HorarioReaderRepositoryInterface::class => static function (ContainerInterface $c) {
         return new HorarioReaderRepository(
+            $c->get('SiteRWConnection')
+        );
+    },
+    GuardiasReaderRepositoryInterface::class => static function (ContainerInterface $c) {
+        return new GuardiasReaderRepository(
             $c->get('SiteRWConnection')
         );
     }
