@@ -7,6 +7,7 @@ use App\Domain\Sites\SiteOptions;
 class SiteFactory
 {
     public static function create(array $site): Site {
+        $cryptKey = $site['CriptKey'] ?? null;
         $dailyQr = $site['QrDiario'] ?? null;
         $googleQr = $site['GoogleQR'] ?? null;
         $ficharSalida = $site['FicharSalida'] ?? null;
@@ -15,6 +16,7 @@ class SiteFactory
         $autoScroll = $site['AutoScroll'] ?? null;
 
         $options = new SiteOptions(
+            $cryptKey,
             $dailyQr,
             $googleQr,
             $ficharSalida,

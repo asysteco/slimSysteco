@@ -23,16 +23,12 @@ async function sendLogin() {
       method: 'POST',
       body: JSON.stringify(loginData),
       headers:{
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Content-Type': 'application/json'
       }
     })
     .then(res => res.json())
     .then(res => {
       if (res.success) {
-        console.log(res.success);
-        console.log(location.href);
-        console.log(mainRoute);
         location.href = mainRoute;
       } else {
         toastr["warning"]("Iniciales y/o contraseña incorrectos", defaultErrorTitle);

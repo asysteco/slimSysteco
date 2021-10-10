@@ -11,6 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 use Dflydev\FigCookies\FigRequestCookies;
 use Dflydev\FigCookies\FigResponseCookies;
 use App\Application\Actions\Error\Error404Action;
+use App\Domain\Sites\SiteOptions;
 use Psr\Http\Server\MiddlewareInterface as Middleware;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Infrastructure\Site\SiteReaderRepositoryInterface;
@@ -19,7 +20,9 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 class ValidateSiteMiddleware implements Middleware
 {
     private const SESSION_VALUE = 'session-site';
+    private const SITE_OPTIONS = 'site-options';
     private const COOKIE_VALUE = 'site';
+    private const ROOT_PATH = '/';
 
     private Error404Action $error404Action;
     private SiteReaderRepositoryInterface $siteReaderRepository;
@@ -47,7 +50,7 @@ class ValidateSiteMiddleware implements Middleware
             in_array($siteCookie->getValue(), $activeSites, true) &&
             (isset($_SESSION[self::SESSION_VALUE]) && $_SESSION[self::SESSION_VALUE] === $siteCookie->getValue())
         ) {
-            $request->withAttribute(self::SESSION_VALUE, $siteCookie->getValue());
+            $request = $this->setSiteOptions($request);
             return $handler->handle($request);
         }
 
@@ -61,7 +64,9 @@ class ValidateSiteMiddleware implements Middleware
 
             return FigResponseCookies::set(
                 $handler->handle($request),
-                SetCookie::create(self::COOKIE_VALUE)->withValue($site)->withDomain(APP_HOST)
+                SetCookie::create(self::COOKIE_VALUE, $site)
+                ->withPath(self::ROOT_PATH)
+                ->withDomain(APP_HOST)
             );
         }
 
@@ -74,5 +79,19 @@ class ValidateSiteMiddleware implements Middleware
         foreach ($_SESSION as $sessionVar) {
             unset($sessionVar);
         }
+    }
+
+    private function setSiteOptions(Request $request): Request
+    {
+        if (!isset($_SESSION[self::SITE_OPTIONS]) || !$_SESSION[self::SITE_OPTIONS] instanceof SiteOptions) {
+            $siteOptions = $this->siteReaderRepository->getSiteInfoByName($_SESSION[self::SESSION_VALUE])->options();
+        } else {
+            $siteOptions = $_SESSION[self::SITE_OPTIONS];
+        }
+        
+        $request = $request->withAttribute(self::SESSION_VALUE, $_SESSION[self::SESSION_VALUE]);
+        $request = $request->withAttribute(self::SITE_OPTIONS, $siteOptions);
+
+        return $request;
     }
 }

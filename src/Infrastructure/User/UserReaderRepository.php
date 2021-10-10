@@ -33,4 +33,20 @@ class UserReaderRepository implements UserReaderRepositoryInterface
 
         return null;
     }
+
+    public function getQrUserLogin(int $decriptedToken): bool
+    {
+        $sql = "SELECT EXISTS (
+                SELECT * FROM Perfiles WHERE Tipo = :readerType AND ID = :token
+            ) as logged";
+
+        $params = [
+            ':readerType' => 'reader',
+            ':token' => $decriptedToken
+        ];
+
+        $result = $this->pdo->query($sql, $params, true);
+
+        return isset($result['logged']) && $result['logged'] === '1';
+    }
 }

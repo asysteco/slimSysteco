@@ -2,9 +2,9 @@
 
 namespace App\Application\UseCase\Login;
 
-use App\Application\Actions\Login\Exception\GetLoginUserException;
 use App\Domain\User\User;
 use App\Infrastructure\User\UserReaderRepositoryInterface;
+use App\Application\UseCase\Login\Exception\GetLoginUserException;
 
 class LoginUseCase
 {
