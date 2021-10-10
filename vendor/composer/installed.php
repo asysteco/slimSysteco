@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'a34e1c11856b57b3ffd5b78bc37823eef810c77d',
+        'reference' => 'e3b2de77db00c52894cecfbf3b5061a182c00caf',
         'name' => 'slim/slim-skeleton',
         'dev' => true,
     ),
@@ -541,7 +541,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'a34e1c11856b57b3ffd5b78bc37823eef810c77d',
+            'reference' => 'e3b2de77db00c52894cecfbf3b5061a182c00caf',
             'dev_requirement' => false,
         ),
         'slim/twig-view' => array(
