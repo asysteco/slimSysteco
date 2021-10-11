@@ -25,9 +25,7 @@ class LogoutUseCase
     private function clearSession()
     {
         if (isset($_SESSION)) {
-            foreach ($_SESSION as $value) {
-                unset($value);
-            }
+            $_SESSION = [];
         }
     }
 
