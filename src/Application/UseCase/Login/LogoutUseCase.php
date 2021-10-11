@@ -12,6 +12,7 @@ class LogoutUseCase
     private const SITE_LOCATION = '/';
     private const SITE_COOKIE = 'site';
     private const SESSION_COOKIE = 'session';
+    private const SESSION_ID = 'PHPSESSID';
 
     public function execute(Request $request, Response $response, string $redirectSite): ResponseInterface
     {
@@ -25,7 +26,7 @@ class LogoutUseCase
     private function clearSession()
     {
         if (isset($_SESSION)) {
-            $_SESSION = [];
+            session_unset();
         }
     }
 
@@ -33,6 +34,7 @@ class LogoutUseCase
     {
         $response = FigResponseCookies::expire($response, self::SITE_COOKIE);
         $response = FigResponseCookies::expire($response, self::SESSION_COOKIE);
+        $response = FigResponseCookies::expire($response, self::SESSION_ID);
 
         return $response;
     }
