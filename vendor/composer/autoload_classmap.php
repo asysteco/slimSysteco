@@ -72,7 +72,6 @@ return array(
     'App\\Infrastructure\\PDO\\Exception\\PDOQueryAsObjectException' => $baseDir . '/src/Infrastructure/PDO/Exception/PDOQueryAsObjectException.php',
     'App\\Infrastructure\\PDO\\Exception\\PDOQueryException' => $baseDir . '/src/Infrastructure/PDO/Exception/PDOQueryException.php',
     'App\\Infrastructure\\PDO\\PdoDataAccess' => $baseDir . '/src/Infrastructure/PDO/PdoDataAccess.php',
-    'App\\Infrastructure\\Persistence\\User\\InMemoryUserRepository' => $baseDir . '/src/Infrastructure/Persistence/User/InMemoryUserRepository.php',
     'App\\Infrastructure\\Profesor\\ProfesorReaderRepository' => $baseDir . '/src/Infrastructure/Profesor/ProfesorReaderRepository.php',
     'App\\Infrastructure\\Profesor\\ProfesorReaderRepositoryInterface' => $baseDir . '/src/Infrastructure/Profesor/ProfesorReaderRepositoryInterface.php',
     'App\\Infrastructure\\Site\\SiteReaderRepository' => $baseDir . '/src/Infrastructure/Site/SiteReaderRepository.php',

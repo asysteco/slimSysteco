@@ -333,7 +333,6 @@ class ComposerStaticInit51ab98edf613ae85a993a266bb2ee262
         'App\\Infrastructure\\PDO\\Exception\\PDOQueryAsObjectException' => __DIR__ . '/../..' . '/src/Infrastructure/PDO/Exception/PDOQueryAsObjectException.php',
         'App\\Infrastructure\\PDO\\Exception\\PDOQueryException' => __DIR__ . '/../..' . '/src/Infrastructure/PDO/Exception/PDOQueryException.php',
         'App\\Infrastructure\\PDO\\PdoDataAccess' => __DIR__ . '/../..' . '/src/Infrastructure/PDO/PdoDataAccess.php',
-        'App\\Infrastructure\\Persistence\\User\\InMemoryUserRepository' => __DIR__ . '/../..' . '/src/Infrastructure/Persistence/User/InMemoryUserRepository.php',
         'App\\Infrastructure\\Profesor\\ProfesorReaderRepository' => __DIR__ . '/../..' . '/src/Infrastructure/Profesor/ProfesorReaderRepository.php',
         'App\\Infrastructure\\Profesor\\ProfesorReaderRepositoryInterface' => __DIR__ . '/../..' . '/src/Infrastructure/Profesor/ProfesorReaderRepositoryInterface.php',
         'App\\Infrastructure\\Site\\SiteReaderRepository' => __DIR__ . '/../..' . '/src/Infrastructure/Site/SiteReaderRepository.php',
