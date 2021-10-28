@@ -56,8 +56,8 @@
         <!-- Profesores Dropdown end -->
 
         <!-- Asistencias actuales start -->
-        <li class="nav-item <?= $act_asistencia ?>">
-            <a class="nav-link" href="<?= $asistenciasAll ?>"> Asistencias actuales</a>
+        <li class="nav-item {{ section is same as asistenciasMenu ? 'active' : null }}">
+            <a class="nav-link" href="{{ asistenciasLink }}"> Asistencias actuales</a>
         </li>
         <!-- Asistencias actuales end -->
 
