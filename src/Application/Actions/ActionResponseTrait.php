@@ -3,7 +3,7 @@
 namespace App\Application\Actions;
 trait ActionResponseTrait
 {
-    public function buildResponse(bool $success, array $data = [], ?string $message = null): array
+    public function buildResponse(bool $success, array $data = [], ?string $message = null): string
     {
         $response = [
             'success' => $success
@@ -17,15 +17,15 @@ trait ActionResponseTrait
             $response['message'] = $message;
         }
 
-        return $response;
+        return json_encode($response);
     }
 
-    public function successResponse(array $data = [], ?string $message = null): array
+    public function successResponse(array $data = [], ?string $message = null): string
     {
         return $this->buildResponse(true, $data, $message);
     }
 
-    public function errorResponse(array $data = [], ?string $message = null): array
+    public function errorResponse(array $data = [], ?string $message = null): string
     {
         return $this->buildResponse(false, $data, $message);
     }

@@ -47,7 +47,7 @@
     vertical-align: middle;
 }
 
-#busca_asiste {
+#busca_asiste, .date-filter {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -68,12 +68,12 @@
     border-radius: 5px 5px 5px 5px;
 }
 
-#busca_asiste:focus {
+#busca_asiste:focus, .date-filter:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
 }
 
-#busca_asiste:placeholder {
+#busca_asiste:placeholder, .date-filter:placeholder {
     color: #cccccc;
 }
 

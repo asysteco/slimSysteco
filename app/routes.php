@@ -15,9 +15,11 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Application\Actions\Cursos\CursosListTwigAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\Guardias\GuardiasListTwigAction;
+use App\Application\Actions\Asistencias\AsistenciasListAction;
 use App\Application\Actions\Horarios\HorariosImportTwigAction;
 use App\Application\Actions\Profesores\ProfesoresAddTwigAction;
 use App\Application\Actions\Profesores\ProfesoresListTwigAction;
+use App\Application\Actions\Asistencias\AsistenciasListTwigAction;
 use App\Application\Actions\Profesores\ProfesoresImportTwigAction;
 
 return function (App $app) {
@@ -38,6 +40,8 @@ return function (App $app) {
             $group->get('/add', ProfesoresAddTwigAction::class)->setName('profesores-add');
             $group->get('/import', ProfesoresImportTwigAction::class)->setName('profesores-import');
         })->add(LoginUserMiddleware::class);
+        
+        $group->get('/asistencias', AsistenciasListTwigAction::class)->setName('asistencias-list')->add(LoginUserMiddleware::class);
 
         $group->get('/login', LoginTwigAction::class)->setName('login');
 
@@ -54,5 +58,7 @@ return function (App $app) {
     $app->group('/xhr', function(Group $group) {
         $group->post('/login', LoginAction::class);
         $group->post('/qrLogin', QrLoginAction::class);
+
+        $group->post('/asistencias/filter', AsistenciasListAction::class)->add(LoginRedirectMiddleware::class);
     });
 };

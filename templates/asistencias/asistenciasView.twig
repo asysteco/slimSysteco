@@ -1,0 +1,82 @@
+{% include "main/header.twig" %}
+{% include "main/topNav/topNav.twig" %}
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row" style="text-align: center;">
+            <div class="col-12">
+                <h3>Filtrar por fecha</h3>
+                <input id="filterAsistencias" class="fadeIn w-25 date-filter" type="text" placeholder="Seleccionar fecha para filtrar..." autocomplete="off" style="min-width: 250px;">
+            </div>
+            <div class="col-12 col-md-6">
+                <h1>Fichajes</h1>
+                <div class="table-responsive">
+                    </br>
+                    <table id="table-fichajes" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="vertical-align: middle; text-align: center;">Profesor/Personal</th>
+                                <th style="vertical-align: middle; text-align: center;">Hora Fichaje</th>
+                                <th style="vertical-align: middle; text-align: center;">Hora Salida</th>
+                                <th style="vertical-align: middle; text-align: center;">Día semana</th>
+                                <th class="d-none">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-fichajes-body">
+
+                            {% if fichajes is not empty %}
+                                {% for fichaje in fichajes %}
+                                    {% set name = fichaje.name() %}
+                                    {% set date = fichaje.date() %}
+                                    {% set checkIn = fichaje.checkIn() %}
+                                    {% set checkOut = fichaje.checkOut() %}
+                                    {% set weekDay = fichaje.weekDay() %}
+
+                                    {% include "asistencias/fichajeRow.twig" %}
+                                {% endfor %}
+                            {% else %}
+                                <td colspan="100%" style="text-align: center;">No existen registros de fichajes.</td>
+                            {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <h1>Faltas</h1>
+                <div class="table-responsive">
+                    </br>
+                    <table id="table-fichajes" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="vertical-align: middle; text-align: center;">Profesor/Personal</th>
+                                <th style="vertical-align: middle; text-align: center;">Día semana</th>
+                                <th class="d-none">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-faltas-body">
+
+                            {% if faltas is not empty %}
+                                {% for falta in faltas %}
+                                    {% set name = falta.name() %}
+                                    {% set weekDay = falta.weekDay() %}
+
+                                    {% include "asistencias/faltaRow.twig" %}
+                                {% endfor %}
+                            {% else %}
+                                <td colspan="100%" style="text-align: center;">No existen registros de falta.</td>
+                            {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/media/js/JavaScript/asistencias/asistencias.js"></script>
+
+</body>
+
+{% include "main/footer.twig" %}

@@ -53,7 +53,7 @@ class LoginAction
                     ->withDomain(APP_HOST)
             );
         }
-        $response->getBody()->write(json_encode($responseData));
+        $response->getBody()->write($responseData);
 
         return $response->withHeader('Content-Type', 'application/json');
     }

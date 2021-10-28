@@ -20,6 +20,8 @@ use App\Infrastructure\Horario\HorarioReaderRepository;
 use App\Infrastructure\Horario\HorarioReaderRepositoryInterface;
 use App\Infrastructure\Horas\HorasReaderRepository;
 use App\Infrastructure\Horas\HorasReaderRepositoryInterface;
+use App\Infrastructure\Marcaje\MarcajeReaderRepository;
+use App\Infrastructure\Marcaje\MarcajeReaderRepositoryInterface;
 
 /** @var ContainerBuilder $containerBuilder */
 $containerBuilder->addDefinitions([
@@ -60,6 +62,11 @@ $containerBuilder->addDefinitions([
     },
     GuardiasReaderRepositoryInterface::class => static function (ContainerInterface $c) {
         return new GuardiasReaderRepository(
+            $c->get('SiteRWConnection')
+        );
+    },
+    MarcajeReaderRepositoryInterface::class => static function (ContainerInterface $c) {
+        return new MarcajeReaderRepository(
             $c->get('SiteRWConnection')
         );
     }
