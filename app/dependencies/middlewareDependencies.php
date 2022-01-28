@@ -14,8 +14,7 @@ $containerBuilder->addDefinitions([
     ValidateSiteMiddleware::class => static function (ContainerInterface $c) {
         return new ValidateSiteMiddleware(
             $c->get(Error404Action::class),
-            $c->get(SiteReaderRepositoryInterface::class),
-            $c->get(LogoutUseCase::class)
+            $c->get(SiteReaderRepositoryInterface::class)
         );
     }
 ]);

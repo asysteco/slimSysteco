@@ -9,8 +9,6 @@ use App\Application\UseCase\Login\LogoutUseCase;
 
 class LogoutAction
 {
-    private const SITE_SESSION = 'session-site';
-
     private LogoutUseCase $logoutUseCase;
 
     public function __construct(LogoutUseCase $logoutUseCase)
@@ -20,9 +18,7 @@ class LogoutAction
 
     public function __invoke(Request $request, Response $response): ResponseInterface
     {
-        $site = $_SESSION[self::SITE_SESSION] ?? null;
-
-        $response = $this->logoutUseCase->execute($request, $response, $site);
+        $response = $this->logoutUseCase->execute($request, $response);
 
         return $response;
     }

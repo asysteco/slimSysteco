@@ -20,9 +20,6 @@ class LoginAction
 {
     use ActionResponseTrait;
 
-    private const SESSION_ID = 'session-id';
-    private const USER_ID = 'user-id';
-    private const COOKIE_SESSION = 'session';
     private const ROOT_PATH = '/';
 
     private LoginUseCase $loginUseCase;
@@ -43,11 +40,8 @@ class LoginAction
 
 
             $responseData = $this->successResponse();
-            
-            $sessionCookie = $this->setSessionValues($user);
 
-            $response = $this->setCookies($user, $request, $response, $sessionCookie);
-            
+            $response = $this->setCookies($user, $request, $response);            
         } catch (Exception $e) {
             $responseData = $this->errorResponse();
         }
@@ -57,33 +51,16 @@ class LoginAction
         return $response->withHeader('Content-Type', 'application/json');
     }
 
-    private function setSessionValues(User $user): string
-    {
-        $hash = sha1($user->id() . date('Ymd'));
-        $_SESSION[self::SESSION_ID] = $hash;
-        $_SESSION[self::USER_ID] = $user->id();
-
-        return $hash;
-    }
-
     private function setCookies(
         User $user,
         Request $request,
-        ResponseInterface $response,
-        string $sessionCookie
+        ResponseInterface $response
     ): ResponseInterface {
         $paramsToEncode = [
             'userId' => $user->id(),
             'site' => $request->getAttribute('site')
         ];
         $jwtValue = base64_encode(JWT::encode($paramsToEncode, JWT_CODE, JWT_METHOD));
-        
-        $response = FigResponseCookies::set(
-            $response,
-            SetCookie::create(self::COOKIE_SESSION, $sessionCookie)
-                ->withPath(self::ROOT_PATH)
-                ->withDomain(APP_HOST)
-        );
         $response = FigResponseCookies::set(
             $response,
             SetCookie::create(JWT_TOKEN_NAME, $jwtValue)

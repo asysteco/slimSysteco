@@ -7,12 +7,9 @@ namespace App\Application\Middleware;
 use Exception;
 use Firebase\JWT\JWT;
 use Slim\Routing\RouteContext;
-use App\Domain\Sites\SiteOptions;
 use Dflydev\FigCookies\SetCookie;
 use Psr\Http\Message\ResponseInterface;
-use Dflydev\FigCookies\FigRequestCookies;
 use Dflydev\FigCookies\FigResponseCookies;
-use App\Application\UseCase\Login\LogoutUseCase;
 use App\Application\Actions\Error\Error404Action;
 use Psr\Http\Server\MiddlewareInterface as Middleware;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -30,16 +27,13 @@ class ValidateSiteMiddleware implements Middleware
 
     private Error404Action $error404Action;
     private SiteReaderRepositoryInterface $siteReaderRepository;
-    private LogoutUseCase $logoutUseCase;
 
     public function __construct(
         Error404Action $error404Action,
-        SiteReaderRepositoryInterface $siteReaderRepository,
-        LogoutUseCase $logoutUseCase
+        SiteReaderRepositoryInterface $siteReaderRepository
     ) {
         $this->error404Action = $error404Action;
         $this->siteReaderRepository = $siteReaderRepository;
-        $this->logoutUseCase = $logoutUseCase;
     }
 
     public function process(Request $request, RequestHandler $handler): ResponseInterface
