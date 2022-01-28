@@ -17,7 +17,8 @@ class LoginTwigAction
     {
         return $this->twig->render(
             $response,
-            'login/login.twig'
+            'login/login.twig',
+            ['session' => $_SESSION]
         );
     }
 }

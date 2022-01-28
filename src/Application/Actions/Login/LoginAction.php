@@ -3,6 +3,7 @@
 namespace App\Application\Actions\Login;
 
 use Exception;
+use Firebase\JWT\JWT;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use App\Domain\User\User;
@@ -11,6 +12,9 @@ use Psr\Http\Message\ResponseInterface;
 use Dflydev\FigCookies\FigResponseCookies;
 use App\Application\UseCase\Login\LoginUseCase;
 use App\Application\Actions\ActionResponseTrait;
+use App\Domain\Sites\Site;
+use Dflydev\FigCookies\FigRequestCookies;
+use Firebase\JWT\Key;
 
 class LoginAction
 {
@@ -36,23 +40,18 @@ class LoginAction
             $username = $params['username'] ?? null;
             $password = $params['password'] ?? null;
             $user = $this->loginUseCase->execute($username, $password);
+
+
             $responseData = $this->successResponse();
             
             $sessionCookie = $this->setSessionValues($user);
+
+            $response = $this->setCookies($user, $request, $response, $sessionCookie);
             
         } catch (Exception $e) {
             $responseData = $this->errorResponse();
         }
 
-
-        if (isset($sessionCookie)) {
-            $response = FigResponseCookies::set(
-                $response,
-                SetCookie::create(self::COOKIE_SESSION, $sessionCookie)
-                    ->withPath(self::ROOT_PATH)
-                    ->withDomain(APP_HOST)
-            );
-        }
         $response->getBody()->write($responseData);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -65,5 +64,33 @@ class LoginAction
         $_SESSION[self::USER_ID] = $user->id();
 
         return $hash;
+    }
+
+    private function setCookies(
+        User $user,
+        Request $request,
+        ResponseInterface $response,
+        string $sessionCookie
+    ): ResponseInterface {
+        $paramsToEncode = [
+            'userId' => $user->id(),
+            'site' => $request->getAttribute('site')
+        ];
+        $jwtValue = base64_encode(JWT::encode($paramsToEncode, JWT_CODE, JWT_METHOD));
+        
+        $response = FigResponseCookies::set(
+            $response,
+            SetCookie::create(self::COOKIE_SESSION, $sessionCookie)
+                ->withPath(self::ROOT_PATH)
+                ->withDomain(APP_HOST)
+        );
+        $response = FigResponseCookies::set(
+            $response,
+            SetCookie::create(JWT_TOKEN_NAME, $jwtValue)
+                ->withPath(self::ROOT_PATH)
+                ->withDomain(APP_HOST)
+        );
+
+        return $response;
     }
 }

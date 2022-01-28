@@ -59,6 +59,7 @@ return function (App $app) {
         $group->post('/login', LoginAction::class);
         $group->post('/qrLogin', QrLoginAction::class);
 
+        $group->post('/checkIn', CheckInAction::class)->add(LoginRedirectMiddleware::class);
         $group->post('/asistencias/filter', AsistenciasListAction::class)->add(LoginRedirectMiddleware::class);
     });
 };

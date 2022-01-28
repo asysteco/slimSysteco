@@ -8,12 +8,10 @@ let qrloginUrl = '/xhr/qrLogin';
 
 document.addEventListener('keypress', function (e) {
     if (e.key === "Enter") {
-        console.log(qrCode);
         qrLogin(qrCode);
         return;
     }
     qrCode = qrCode + e.key;
-    console.log(qrCode);
 });
 
 async function qrLogin(loginToken) {

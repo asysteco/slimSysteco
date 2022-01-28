@@ -5,25 +5,27 @@ declare(strict_types=1);
 namespace App\Application\Middleware;
 
 use Exception;
+use Firebase\JWT\JWT;
 use Slim\Routing\RouteContext;
+use App\Domain\Sites\SiteOptions;
 use Dflydev\FigCookies\SetCookie;
 use Psr\Http\Message\ResponseInterface;
 use Dflydev\FigCookies\FigRequestCookies;
 use Dflydev\FigCookies\FigResponseCookies;
-use App\Application\Actions\Error\Error404Action;
 use App\Application\UseCase\Login\LogoutUseCase;
-use App\Domain\Sites\SiteOptions;
+use App\Application\Actions\Error\Error404Action;
 use Psr\Http\Server\MiddlewareInterface as Middleware;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Infrastructure\Site\SiteReaderRepositoryInterface;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
+use Slim\Psr7\Response;
 
 class ValidateSiteMiddleware implements Middleware
 {
-    private const SESSION_VALUE = 'session-site';
+    private const LOGIN_URL = '/login';
     private const SITE_OPTIONS = 'site-options';
     private const SITE_DB = 'site-db';
-    private const COOKIE_VALUE = 'site';
+    private const SITE_VALUE = 'site';
     private const ROOT_PATH = '/';
 
     private Error404Action $error404Action;
@@ -47,67 +49,69 @@ class ValidateSiteMiddleware implements Middleware
         } catch (Exception $e) {
             return $this->error404Action->__invoke();
         }
-        session_start();
 
         $route = RouteContext::fromRequest($request)->getRoute();
-        $site = $route->getArgument(self::COOKIE_VALUE);
+        $requestSite = $route->getArgument(self::SITE_VALUE);
+        $cookieSite = $request->getAttribute(self::SITE_VALUE);
 
-        $siteCookie = FigRequestCookies::get($request, self::COOKIE_VALUE);
         if (
-            $siteCookie &&
-            in_array($siteCookie->getValue(), $activeSites, true) &&
-            (isset($_SESSION[self::SESSION_VALUE]) && $_SESSION[self::SESSION_VALUE] === $siteCookie->getValue())
+            $cookieSite &&
+            in_array($cookieSite, $activeSites, true)
         ) {
-            if ($site !== null && $siteCookie->getValue() !== $site) {
-                $_SESSION[self::SESSION_VALUE] = $site;
-                $response = $this->logoutUseCase->execute($request, $handler->handle($request), $site);
+            if ($requestSite !== null && $cookieSite !== $requestSite) {
+                $paramsToEncode = [
+                    'site' => $requestSite
+                ];
 
+                $this->clearSession();
+                $response = $this->toCookie($paramsToEncode, $handler->handle($request))->withAddedHeader('Location', self::LOGIN_URL);
                 return $response->withStatus(302);
             }
-            $request = $this->setSiteOptions($request);
+            $request = $this->setSiteOptions($request, $cookieSite);
             return $handler->handle($request);
         }
 
-        $this->clearSessionSite();
+        if (in_array($requestSite, $activeSites, true)) {
+            $paramsToEncode = [
+                'site' => $requestSite
+            ];
 
-        if (in_array($site, $activeSites, true)) {
-            $_SESSION[self::SESSION_VALUE] = $site;
-
-            return FigResponseCookies::set(
-                $handler->handle($request),
-                SetCookie::create(self::COOKIE_VALUE, $site)
-                ->withPath(self::ROOT_PATH)
-                ->withDomain(APP_HOST)
-            );
+            return $this->toCookie($paramsToEncode, $handler->handle($request));
         }
 
         return $this->error404Action->__invoke();
     }
 
-
-    private function clearSessionSite(): void
+    private function setSiteOptions(Request $request, string $cookieSite): Request
     {
-        foreach ($_SESSION as $sessionVar) {
-            unset($sessionVar);
-        }
-    }
-
-    private function setSiteOptions(Request $request): Request
-    {
-        if (!isset($_SESSION[self::SITE_OPTIONS]) || !$_SESSION[self::SITE_OPTIONS] instanceof SiteOptions) {
-            $siteOptions = $this->siteReaderRepository->getSiteInfoByName($_SESSION[self::SESSION_VALUE])->options();
-        } else {
-            $siteOptions = $_SESSION[self::SITE_OPTIONS];
-        }
+        $siteOptions = $this->siteReaderRepository->getSiteInfoByName($cookieSite)->options();
 
         if (!isset($_SESSION[self::SITE_DB]) || empty($_SESSION[self::SITE_DB])) {
-            $siteDbConfig = $this->siteReaderRepository->getSiteDbConfig($_SESSION[self::SESSION_VALUE]);
+            $siteDbConfig = $this->siteReaderRepository->getSiteDbConfig($cookieSite);
             $_SESSION[self::SITE_DB] = $siteDbConfig;
         }
-        
-        $request = $request->withAttribute(self::SESSION_VALUE, $_SESSION[self::SESSION_VALUE]);
+
         $request = $request->withAttribute(self::SITE_OPTIONS, $siteOptions);
 
         return $request;
+    }
+
+    private function toCookie(array $params, Response $response): Response
+    {
+        $jwtValue = base64_encode(JWT::encode($params, JWT_CODE, JWT_METHOD));
+
+        return FigResponseCookies::set(
+            $response,
+            SetCookie::create(JWT_TOKEN_NAME, $jwtValue)
+            ->withPath(self::ROOT_PATH)
+            ->withDomain(APP_HOST)
+        );
+    }
+
+    private function clearSession(): void
+    {
+        if (isset($_SESSION)) {
+            session_unset();
+        }
     }
 }

@@ -16,3 +16,8 @@ define('DEVELOPMENT', 'development');
 
 // MESSAGES
 define('DEFAULT_ERROR', 'Ha ocurrido un error inesperado, contacte con los administradores.');
+
+// JWT VALUES
+define('JWT_TOKEN_NAME', 'auth-token');
+define('JWT_CODE', $_ENV['JWT_CODE']);
+define('JWT_METHOD', $_ENV['JWT_METHOD']);
