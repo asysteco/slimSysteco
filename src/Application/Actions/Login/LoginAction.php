@@ -12,9 +12,6 @@ use Psr\Http\Message\ResponseInterface;
 use Dflydev\FigCookies\FigResponseCookies;
 use App\Application\UseCase\Login\LoginUseCase;
 use App\Application\Actions\ActionResponseTrait;
-use App\Domain\Sites\Site;
-use Dflydev\FigCookies\FigRequestCookies;
-use Firebase\JWT\Key;
 
 class LoginAction
 {
@@ -58,6 +55,7 @@ class LoginAction
     ): ResponseInterface {
         $paramsToEncode = [
             'userId' => $user->id(),
+            'userType' => $user->type(),
             'site' => $request->getAttribute('site')
         ];
         $jwtValue = base64_encode(JWT::encode($paramsToEncode, JWT_CODE, JWT_METHOD));

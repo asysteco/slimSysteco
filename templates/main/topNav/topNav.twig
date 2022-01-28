@@ -25,11 +25,11 @@
 
   {% set logoutLink = '/logout' %}
 
-  {% if user.type is same as 1 %}
+  {% if userType is same as 1 %}
     {% include "main/topNav/adminNav.twig" %}
-  {% elseif user.type is same as 2 %}
+  {% elseif userType is same as 2 %}
     {% include "main/topNav/profesorNav.twig" %}
-  {% elseif user.type is same as 3 %}
+  {% elseif userType is same as 3 %}
     {% include "main/topNav/personalNav.twig" %}
   {% endif %}
 

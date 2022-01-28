@@ -18,7 +18,7 @@ class ProfesoresImportTwigAction
 
     public function __invoke(Request $request, Response $response): Response
     {
-        $user = $request->getAttribute('user');
+        $userType = $request->getAttribute('userType');
 
         return $this->twig->render(
             $response,
@@ -27,7 +27,7 @@ class ProfesoresImportTwigAction
                 'title' => 'Importar Personal',
                 'menu' => 'profesores',
                 'section' => 'importProfesores',
-                'user' => $user
+                'userType' => $userType
             ]
         );
     }

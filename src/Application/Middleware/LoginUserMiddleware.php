@@ -38,6 +38,10 @@ class LoginUserMiddleware implements Middleware
             $request = $request->withAttribute('userId', $decodedToken->userId);
         }
 
+        if (isset($decodedToken->userId)) {
+            $request = $request->withAttribute('userType', $decodedToken->userType);
+        }
+
         if (isset($decodedToken->site)) {
             $request = $request->withAttribute('site', $decodedToken->site);
         }

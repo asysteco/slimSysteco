@@ -22,7 +22,7 @@ class ProfesoresListTwigAction
 
     public function __invoke(Request $request, Response $response): Response
     {
-        $user = $request->getAttribute('user');
+        $userType = $request->getAttribute('userType');
         $profesores = $this->profesorReaderRepository->getProfesorList();
 
         return $this->twig->render(
@@ -32,7 +32,7 @@ class ProfesoresListTwigAction
                 'title' => 'Profesores / Personal',
                 'menu' => 'profesores',
                 'section' => 'profesores',
-                'user' => $user,
+                'userType' => $userType,
                 'profesores' => $profesores
             ]
         );

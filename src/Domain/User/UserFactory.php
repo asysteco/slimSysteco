@@ -8,13 +8,15 @@ class UserFactory
 {
     public static function create(array $user): User {
         $id = $user['ID'] ?? null;
-        $name = $user['Nombre'] ?? '';
-        $username = $user['Iniciales'] ?? '';
+        $name = $user['Nombre'] ?? null;
+        $username = $user['Iniciales'] ?? null;
+        $type = $user['TIPO'] ?? null;
 
         return new User(
             $id,
             $name,
-            $username
+            $username,
+            $type
         );
     }
 

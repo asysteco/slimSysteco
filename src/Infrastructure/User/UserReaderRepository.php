@@ -23,7 +23,7 @@ class UserReaderRepository implements UserReaderRepositoryInterface
 
     public function getUserLogin(string $username, string $password): ?User
     {
-        $sql = "SELECT ID, Iniciales, Nombre FROM Profesores WHERE Iniciales = :username AND Password = :password";
+        $sql = "SELECT ID, Iniciales, Nombre, TIPO FROM Profesores WHERE Iniciales = :username AND Password = :password";
 
         $params = [
             ':username' => $username,

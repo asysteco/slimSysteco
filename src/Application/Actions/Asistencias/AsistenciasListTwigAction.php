@@ -22,7 +22,7 @@ class AsistenciasListTwigAction
 
     public function __invoke(Request $request, Response $response): Response
     {
-        $user = $request->getAttribute('user');
+        $userType = $request->getAttribute('userType');
         $result = $this->getAsistenciasUseCase->execute();
 
         return $this->twig->render(
@@ -32,7 +32,7 @@ class AsistenciasListTwigAction
                 'title' => 'Asistencias',
                 'menu' => 'asistencias',
                 'section' => 'asistencias',
-                'user' => $user,
+                'userType' => $userType,
                 'fichajes' => $result['fichajes'],
                 'faltas' => $result['faltas']
             ]

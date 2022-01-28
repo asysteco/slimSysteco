@@ -22,7 +22,7 @@ class ProfesoresAddTwigAction
 
     public function __invoke(Request $request, Response $response): Response
     {
-        $user = $request->getAttribute('user');
+        $userType = $request->getAttribute('userType');
 
         return $this->twig->render(
             $response,
@@ -31,7 +31,7 @@ class ProfesoresAddTwigAction
                 'title' => 'Registrar personal',
                 'menu' => 'profesores',
                 'section' => 'add',
-                'user' => $user
+                'userType' => $userType
             ]
         );
     }

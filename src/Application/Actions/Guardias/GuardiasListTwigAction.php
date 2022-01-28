@@ -22,7 +22,7 @@ class GuardiasListTwigAction
 
     public function __invoke(Request $request, Response $response): Response
     {
-        $user = $request->getAttribute('user');
+        $userType = $request->getAttribute('userType');
         $siteOptions = $request->getAttribute('site-options');
         $guardias = $this->getGuardiasUseCase->execute();
 
@@ -32,7 +32,7 @@ class GuardiasListTwigAction
             [
                 'title' => 'Guardias',
                 'menu' => 'guardias',
-                'user' => $user,
+                'userType' => $userType,
                 'guardias' => $guardias,
                 'siteOptions' => $siteOptions
             ]

@@ -22,9 +22,9 @@ class HorariosImportTwigAction
 
     public function __invoke(Request $request, Response $response): Response
     {
-        $user = $request->getAttribute('user');
-        $session = $request->getAttribute('session');
-        $data = $this->getImportFormDataUseCase->execute($session['session-site']);
+        $userType = $request->getAttribute('userType');
+        $site = $request->getAttribute('site');
+        $data = $this->getImportFormDataUseCase->execute($site);
 
         return $this->twig->render(
             $response,
@@ -33,7 +33,7 @@ class HorariosImportTwigAction
                 'title' => 'Importar Horarios',
                 'menu' => 'horarios',
                 'section' => 'importHorarios',
-                'user' => $user,
+                'userType' => $userType,
                 'siteInfo' => $data['siteInfo'],
                 'franjas' => $data['franjas'],
                 'horariosExists' => $data['horariosExists']

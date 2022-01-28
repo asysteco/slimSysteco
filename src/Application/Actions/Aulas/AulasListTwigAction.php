@@ -22,7 +22,7 @@ class AulasListTwigAction
 
     public function __invoke(Request $request, Response $response): Response
     {
-        $user = $request->getAttribute('user');
+        $userType = $request->getAttribute('userType');
         $aulas = $this->getAulasUseCase->execute();
 
         return $this->twig->render(
@@ -32,7 +32,7 @@ class AulasListTwigAction
                 'title' => 'Gestionar Aulas',
                 'menu' => 'horarios',
                 'section' => 'aulas',
-                'user' => $user,
+                'userType' => $userType,
                 'aulas' => $aulas
             ]
         );
