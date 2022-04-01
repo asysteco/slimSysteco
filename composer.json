@@ -25,7 +25,7 @@
         "php": "^7.4",
         "ext-json": "*",
         "dflydev/fig-cookies": "^3.0",
-        "monolog/monolog": "^2.3",
+        "monolog/monolog": "^2.4",
         "php-di/php-di": "^6.3",
         "slim/psr7": "^1.5",
         "slim/slim": "^4.8",
